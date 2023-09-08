@@ -9,7 +9,6 @@
   <img src="./public/banner-and-logo.png" alt="Logo">
 
   <h3 align="center">Electoral Voting Web Application - Secure Vote</h3>
-s
   <p align="center">
     StackTrek Capstone Project
     <br />
