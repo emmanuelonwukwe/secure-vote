@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         element: <Contact />
       },
     ]
-  }
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
