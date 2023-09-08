@@ -90,7 +90,7 @@ You need to have `npm` installed on your computer in order to be able to install
    ```
 2. Install NPM packages
    ```sh
-   cd secure-vote && npm install
+   cd secure-vote/client && npm install
    ```
 3. Run the Project
    ```sh

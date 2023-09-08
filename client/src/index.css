@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    .outlet-area{
+        @apply bg-slate-400 w-[90vw] mx-auto
+    }
+}
