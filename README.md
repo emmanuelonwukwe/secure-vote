@@ -6,7 +6,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center"> 
-  <img src="./public/banner-and-logo.png" alt="Logo">
+  <img src="./client/public/banner-and-logo.png" alt="Logo">
 
   <h3 align="center">Electoral Voting Web Application - Secure Vote</h3>
   <p align="center">
