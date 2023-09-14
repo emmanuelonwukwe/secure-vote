@@ -96,13 +96,13 @@ You need to have `npm` installed on your computer in order to be able to install
    ```sh
    npm run dev
    ```
-4. Navigate to `http://127.0.0.1:5173/` (or the exposed port) on your favourite browser
+4. Navigate to `http://127.0.0.1:5173/` (or the exposed port) on your favorite browser
 
 ## Features
 
 The electoral voting app will consist of the following features:
 
-```[tasklist]
+```[task list]
 - [ ] Voter Registration and Authentication
 - [ ] Voter Validation using BVN (Bank Verification Number) (See https://github.com/Official-kornelios/BVN-verification)
 - [ ] Account Management System and Dashboard for Voters and Election Manager
@@ -113,15 +113,7 @@ The electoral voting app will consist of the following features:
 - [ ] Feedback and Support Channels (e.g, Email or WhatsApp)
 ```
 
-## How to Contribute
 
-🚀 Before becoming a contributor, it is worth reading this section to know the convention and practices in place and the conduct that is expected:
-
-Please, communicate the change you wish to make via the issues page, email or any other available method with other team members before making it. 😊
-
-For the coding convention, please see the <a href="https://github.com/airbnb/javascript" target="_blank">Airbnb JavaScript Style Guide</a>.
-
-For the commit message convention, please see https://www.conventionalcommits.org/en/v1.0.0/
 
 [contributors-shield]: https://img.shields.io/github/contributors/emmanuelonwukwe/secure-vote.svg?style=for-the-badge
 [contributors-url]: https://github.com/emmanuelonwukwe/secure-vote/graphs/contributors
