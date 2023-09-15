@@ -1,39 +1,44 @@
-import sql from "./db.js";
 import express from "express";
-import cors from "cors";
+import AppGlobalMiddlewares from "./app/Http/Middlewares/AppGlobalMiddlewares.js";
+import PgController from "./app/Http/Controllers/PgController.js";
 
+// The express object
 const app = express();
-app.use(express.json());
-
-// Variables
-const ServerPort = 3000;
 
 //middlewares
-app.use(cors({ origin: ["http://localhost:5173"] }));
+new AppGlobalMiddlewares();
 
-// First query to get the version of the database
-async function getPgVersion() {
-    const version = await sql`SELECT VERSION()`;
-    return version;
-  }
-  
-  // This endpoint returns the version of the postgres
-  app.get("/", async (req, res) => {
-    try {
-      const version = await getPgVersion();
-      //res.render("/"); causees error when not found
-      res.send(version);
-    } catch (error) {
-      res.send("Error occured");
-    }
+// Variables
+const apiVersion = "/api/v1";
+
+// The entry default route
+app.get("/", (req, res) => {
+  res.json({
+    status: "Success",
+    message: "Welcome to secured vote apis"
+  })
+});
+
+// This endpoint returns the version of the postgres
+app.get(`${apiVersion}/pg-version`, async (req, res) => {
+  const pgController = new PgController(req, res);
+  pgController.getPgVersion();
+});
+
+// This api handles the login actions
+app.get(`${apiVersion}/login`, async (req, res) => {
+  res.send({
+    message: "Login controller output"
   });
+});
 
-  
+// The Register route for the application
+app.post("/login")
 // This is an unknown route
 app.get("*", (req, res) => {
-    res.send("Unknown route");
-  });
-  
-  app.listen(ServerPort, () => {
-    console.log("Server started at port " + ServerPort);
-  });
+  res.send("Unknown route");
+});
+
+app.listen(process.env.SERVER_PORT, () => {
+  console.log("Server started at port " + process.env.SERVER_PORT);
+});
