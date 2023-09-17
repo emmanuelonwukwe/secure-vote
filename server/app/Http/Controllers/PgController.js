@@ -10,7 +10,7 @@ class PgController {
   async getPgVersion() {
     const version = await getPgVersion(sql);
     //res.render("/"); causees error when not found
-    this.res.send(version);
+    this.res.json(version);
   }
 }
 

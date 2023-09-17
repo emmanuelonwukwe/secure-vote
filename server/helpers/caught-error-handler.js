@@ -8,8 +8,9 @@
 function handleCaughtErrorRes(error, res) {
     res.status(error.statusCode ?? 500);
     res.json({
-        errorName: error.name,
         message: error.message,
+        errorName: error.name,
+        erroCode: error.code,
         stackTrace: process.env.APP_ENVIRONMENT == 'development' ? error?.stack : 'No trace as app env is not in `development` mode'
     });
 }

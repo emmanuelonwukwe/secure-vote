@@ -1,6 +1,4 @@
 class ApiException extends Error {
-    
-
     /**
      * 
      * @param {string} msg - The error message to be displayed
