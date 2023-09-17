@@ -1,27 +1,52 @@
-// The entry default route
-app.get("/", (req, res) => {
-    res.json({
-      status: "Success",
-      message: "Welcome to secured vote apis"
-    })
-  });
-  
-  // This endpoint returns the version of the postgres
-  app.get(`${apiVersion}/pg-version`, async (req, res) => {
-    const pgController = new PgController(req, res);
-    pgController.getPgVersion();
-  });
-  
-  // This api handles the login actions
-  app.get(`${apiVersion}/login`, async (req, res) => {
+import express from "express";
+import PgController from "../app/Http/Controllers/PgController.js";
+import ApiException from "../app/Exceptions/ApiException.js";
+import handleCaughtErrorRes from "../helpers/caught-error-handler.js";
+import AdminOnlyMiddleware from "../app/Http/Middlewares/AdminOnlyMiddleware.js";
+
+const router = express.Router();
+
+/**
+ *  Here are the sub routes to be with the index.js router middleware path;
+ * 
+ */
+
+// The entry default sub route
+router.get("/", (req, res) => {
+    try {
+        if (req.ip == '0::1') {
+            throw new ApiException("This Ip is barred from accessing this api", "502");
+        }
+
+        res.json({
+            message: "Welcome to secure vote apis",
+            ip: req.ip
+        });
+    } catch (error) {
+        handleCaughtErrorRes(error, res);
+    }
+});
+
+// This endpoint returns the version of the postgres
+router.get("/pg-version", new AdminOnlyMiddleware().handle, async (req, res) => {
+    try {
+        const pgController = new PgController(req, res);
+        await pgController.getPgVersion();
+    } catch (error) {
+        handleCaughtErrorRes(error, res)
+    }
+});
+
+// This api handles the login actions
+router.get("/login", async (req, res) => {
     res.send({
-      message: "Login controller output"
+        message: "Login controller output"
     });
-  });
-  
-  // The Register route for the application
-  app.post("/login")
-  // This is an unknown route
-  app.get("*", (req, res) => {
+});
+
+// This is an unknown route
+router.get("*", (req, res) => {
     res.send("Unknown route");
-  });
+});
+
+export default router;

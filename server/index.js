@@ -1,17 +1,19 @@
+
 import express from "express";
-import AppGlobalMiddlewares from "./app/Http/Middlewares/AppGlobalMiddlewares.js";
-import PgController from "./app/Http/Controllers/PgController.js";
+import SetAppGlobalMiddlewares from "./app/Http/Middlewares/SetAppGlobalMiddlewares.js";
+import router from "./routes/api.js";
 
 // The express object
 const app = express();
 
 //middlewares
-new AppGlobalMiddlewares();
+new SetAppGlobalMiddlewares();
 
-// Variables
-const apiVersion = "/api/v1";
+//app.use(AdminOnlyMiddleware.handle);
 
+app.use("/api/v1", router);
 
+// Start the express server at the designated port in the env file
 app.listen(process.env.SERVER_PORT, () => {
   console.log("Server started at port " + process.env.SERVER_PORT);
 });
