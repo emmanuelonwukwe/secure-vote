@@ -119,6 +119,53 @@ class BaseModel {
     }
 
     /**
+     * This function counts the total from a table based on the condition
+     */
+    async count(condition) {
+        // The partial query to be added to the main qry
+        const partialQry = (condition) => sql`${condition}`;
+        const count = await sql`SELECT COUNT(*) as total FROM ${this.table} WHERE ${partialQry(condition)}`;
+
+        return count;
+    }
+
+    /**
+     * This function sums the column total from a table based on the condition
+     * @param {string} col - The column to sum
+     */
+    async sum(col, condition) {
+        // The partial query to be added to the main qry
+        const partialQry = (condition) => sql`${condition}`;
+        const sum = await sql`SELECT SUM(${col}) as total FROM ${this.table} WHERE ${partialQry(condition)}`;
+
+        return sum;
+    }
+
+    /**
+     * This function gets the minimum of the column from a table based on the condition
+     * @param {string} col - The column to sum
+     */
+    async min(col, condition) {
+        // The partial query to be added to the main qry
+        const partialQry = (condition) => sql`${condition}`;
+        const min = await sql`SELECT MIN(${col}) as total FROM ${this.table} WHERE ${partialQry(condition)}`;
+
+        return min;
+    }
+
+    /**
+     * This function gets the maximum of the column from a table based on the condition
+     * @param {string} col - The column to sum
+     */
+    async max(col, condition) {
+        // The partial query to be added to the main qry
+        const partialQry = (condition) => sql`${condition}`;
+        const max = await sql`SELECT MAX(${col}) as total FROM ${this.table} WHERE ${partialQry(condition)}`;
+
+        return max;
+    }
+
+    /**
      * This private function checks if table attribute is specified in the child class
      */
     #modelTableIsSpecified() {
