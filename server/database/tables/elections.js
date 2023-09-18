@@ -9,7 +9,7 @@ async function electionsCreateTableQry(sql) {
         title VARCHAR(255) NOT NULL,
         description VARCHAR(255) NOT NULL,
         visibility VARCHAR(255) NOT NULL,
-        voting_requirement LONGTEXT,
+        voting_requirement TEXT,
         status VARCHAR(255) NOT NULL,
         date_created TIMESTAMP DEFAULT NOW(),
         time_created integer DEFAULT CAST(EXTRACT(epoch FROM NOW()) AS INT),

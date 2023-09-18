@@ -1,5 +1,5 @@
 import sql from "../../config/db.js";
-import DBTables from "../../database/dbTables.js";
+import DBTables from "../../database/db-tables.js";
 import ApiException from "../Exceptions/ApiException.js";
 
 /**
@@ -10,7 +10,7 @@ class BaseModel {
     table = '';
 
     /**
-     * This helps to create a resource to this model db table
+     * This helps to create a resource to this model db table anytime
      * @param {object} data - The object of the model  to be inserted to db
      */
     async create(data) {
@@ -25,12 +25,12 @@ class BaseModel {
         // Check if the data keys exists in the global db tables array of this model
         Object.entries(data).forEach(([key, val]) => {
             if (!DBTables[this.table].includes(key)) {
-                throw new ApiException(`Your data key '${key}' is not registered in the ${this.table} table of global database DBTables`);
+                throw new ApiException(`Your data key '${key}' is not registered in the ${sql(this.table)} table of global database DBTables`);
             }
         });
 
         // Insert to the database this value and return the new inserted row
-        const newModel = await sql`INSERT INTO ${this.table} ${sql(data)} RETURNING *`;
+        const newModel = await sql`INSERT INTO ${sql(this.table)} ${sql(data)} RETURNING *`;
 
         return newModel;
     }
@@ -42,7 +42,7 @@ class BaseModel {
         // Check if the model table is specified for this model
         this.#modelTableIsSpecified();
 
-        const models = await sql`SELECT * FROM ${this.table}`;
+        const models = await sql`SELECT * FROM ${sql(this.table)}`;
 
         return models;
     }
@@ -55,7 +55,7 @@ class BaseModel {
         // The partial query to be added to the main qry
         const partialQry = (condition) => sql`${condition}`;
 
-        const models = await sql`SELECT * FROM ${this.table} WHERE ${partialQry(condition)}`;
+        const models = await sql`SELECT * FROM ${sql(this.table)} WHERE ${partialQry(condition)}`;
 
         return models;
     }
@@ -77,13 +77,13 @@ class BaseModel {
         // Check if the data exists in the global db tables array of this model
         Object.entries(data).forEach(([key, val]) => {
             if (!DBTables[this.table].includes(key)) {
-                throw new ApiException(`Your data key '${key}' is not registered in the ${this.table} table of global database DBTables`);
+                throw new ApiException(`Your data key '${key}' is not registered in the ${sql(this.table)} table of global database DBTables`);
             }
         });
 
         // The partial query to be added to the main qry
         const partialQry = (condition) => sql`${condition}`;
-        const updatedModel = await sql`UPDATE ${this.table} SET ${sql(data)} WHERE ${partialQry(condition)} RETURNING *`;
+        const updatedModel = await sql`UPDATE ${sql(this.table)} SET ${sql(data)} WHERE ${partialQry(condition)} RETURNING *`;
 
         return updatedModel;
     }
@@ -95,7 +95,7 @@ class BaseModel {
     async delete(condition) {
         // The partial query to be added to the main qry
         const partialQry = (condition) => sql`${condition}`;
-        const deletedModel = await sql`DELETE FROM ${this.table} WHERE ${partialQry(condition)} RETURNING *`;
+        const deletedModel = await sql`DELETE FROM ${sql(this.table)} WHERE ${partialQry(condition)} RETURNING *`;
 
         return deletedModel;
     }
@@ -109,7 +109,7 @@ class BaseModel {
 
         // The partial query to be added to the main qry
         const partialQry = (condition) => sql`${condition}`;
-        const model = await sql`SELECT * FROM ${this.table} WHERE ${partialQry(condition)}`;
+        const model = await sql`SELECT * FROM ${sql(this.table)} WHERE ${partialQry(condition)}`;
 
         if (model.length > 0) {
             return true
@@ -124,7 +124,7 @@ class BaseModel {
     async count(condition) {
         // The partial query to be added to the main qry
         const partialQry = (condition) => sql`${condition}`;
-        const count = await sql`SELECT COUNT(*) as total FROM ${this.table} WHERE ${partialQry(condition)}`;
+        const count = await sql`SELECT COUNT(*) as total FROM ${sql(this.table)} WHERE ${partialQry(condition)}`;
 
         return count;
     }
@@ -136,7 +136,7 @@ class BaseModel {
     async sum(col, condition) {
         // The partial query to be added to the main qry
         const partialQry = (condition) => sql`${condition}`;
-        const sum = await sql`SELECT SUM(${col}) as total FROM ${this.table} WHERE ${partialQry(condition)}`;
+        const sum = await sql`SELECT SUM(${col}) as total FROM ${sql(this.table)} WHERE ${partialQry(condition)}`;
 
         return sum;
     }
@@ -148,7 +148,7 @@ class BaseModel {
     async min(col, condition) {
         // The partial query to be added to the main qry
         const partialQry = (condition) => sql`${condition}`;
-        const min = await sql`SELECT MIN(${col}) as total FROM ${this.table} WHERE ${partialQry(condition)}`;
+        const min = await sql`SELECT MIN(${col}) as total FROM ${sql(this.table)} WHERE ${partialQry(condition)}`;
 
         return min;
     }
@@ -160,7 +160,7 @@ class BaseModel {
     async max(col, condition) {
         // The partial query to be added to the main qry
         const partialQry = (condition) => sql`${condition}`;
-        const max = await sql`SELECT MAX(${col}) as total FROM ${this.table} WHERE ${partialQry(condition)}`;
+        const max = await sql`SELECT MAX(${col}) as total FROM ${sql(this.table)} WHERE ${partialQry(condition)}`;
 
         return max;
     }
@@ -175,7 +175,7 @@ class BaseModel {
 
         // Check if it is an invalid table
         if (!DBTables.hasOwnProperty(this.table)) {
-            throw new ApiException(`The ${this.constructor.name} model table '${this.table}' is not registered in the global DBTables of your database`);
+            throw new ApiException(`The ${this.constructor.name} model table '${sql(this.table)}' is not registered in the global DBTables of your database`);
         }
 
         return true;

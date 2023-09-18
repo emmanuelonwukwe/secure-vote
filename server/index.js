@@ -1,8 +1,9 @@
 
 import express from "express";
 import SetAppGlobalMiddlewares from "./app/Http/Middlewares/SetAppGlobalMiddlewares.js";
-import router from "./routes/api.js";
+import apiRouter from "./routes/api.js";
 import handleCaughtErrorRes from "./helpers/caught-error-handler.js";
+import authRouter from "./routes/auth.js";
 
 // The express object
 const app = express();
@@ -11,7 +12,11 @@ const app = express();
 new SetAppGlobalMiddlewares(app);
 
 // Set the router
-app.use("/api/v1", router);
+const baseUrl = "/api/v1";
+app.use(baseUrl, authRouter);
+
+// The last router handles unknown routes
+app.use(baseUrl, apiRouter);
 
 // Express error listener middleware
 app.use((error, req, res, next) => {
