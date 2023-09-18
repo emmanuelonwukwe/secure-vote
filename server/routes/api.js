@@ -3,7 +3,6 @@ import PgController from "../app/Http/Controllers/PgController.js";
 import ApiException from "../app/Exceptions/ApiException.js";
 import handleCaughtErrorRes from "../helpers/caught-error-handler.js";
 import AdminOnlyMiddleware from "../app/Http/Middlewares/AdminOnlyMiddleware.js";
-import RegisterController from "../app/Http/Controllers/RegisterController.js";
 
 const router = express.Router();
 
@@ -36,21 +35,6 @@ router.get("/pg-version", AdminOnlyMiddleware.handle, async (req, res) => {
     }
 });
 
-// The registration route for new users
-router.get("/signup", async (req, res) => {
-    try {
-        await RegisterController.register({ age: "not" });
-    } catch (error) {
-        handleCaughtErrorRes(error, res)
-    }
-})
-
-// This api handles the login actions
-router.get("/login", async (req, res) => {
-    res.json({
-        message: "Login controller output"
-    });
-});
 
 // This is an unknown route
 router.get("*", (req, res) => {

@@ -7,10 +7,6 @@ import ApiException from "../../Exceptions/ApiException.js";
 class AdminOnlyMiddleware extends BaseMiddleware {
     role = this.getRole();
 
-    constructor() {
-        super();
-    }
-
     getRole() {
         return "user";
     }

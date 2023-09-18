@@ -2,7 +2,7 @@
  * 
  * @param {postgres.TransactionSql} sql - This should be transaction sql
  */
-async function reset_passwordsCreateTableQry(sql) {
+async function resetPasswordsCreateTableQry(sql) {
     await sql`CREATE TABLE IF NOT EXISTS reset_passwords(
         id SERIAL PRIMARY KEY,
         user_id INTEGER,
@@ -13,4 +13,4 @@ async function reset_passwordsCreateTableQry(sql) {
     )`;
 }
 
-export default reset_passwordsCreateTableQry;
+export default resetPasswordsCreateTableQry;
