@@ -10,7 +10,7 @@ class BaseModel {
     table = '';
 
     /**
-     * This helps to create a resource to this model db table
+     * This helps to create a resource to this model db table anytime
      * @param {object} data - The object of the model  to be inserted to db
      */
     async create(data) {
