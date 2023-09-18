@@ -8,16 +8,9 @@ class PgController {
   }
 
   async getPgVersion() {
-    try {
-      const version = await getPgVersion(sql);
-      //res.render("/"); causees error when not found
-      this.res.send(version);
-    } catch (error) {
-      this.res.status(401).json({
-        message: "Error occured",
-        error: "Error occured " + error,
-      });
-    }
+    const version = await getPgVersion(sql);
+    //res.render("/"); causees error when not found
+    this.res.json(version);
   }
 }
 

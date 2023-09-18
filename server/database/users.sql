@@ -1,5 +1,0 @@
-CREATE TABLE IF NOT EXISTS users(
-    id SERIAL PRIMARY KEY,
-    age INTEGER NOT NULL,
-    origin_state VARCHAR(255) NOT NULL
-);
