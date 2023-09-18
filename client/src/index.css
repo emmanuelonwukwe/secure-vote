@@ -3,7 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+    #root{
+        @apply bg-aliceblue-100 md:pt-7
+    }
     .outlet-area{
-        @apply bg-slate-400 w-[95vw] mx-auto
+        @apply w-full mx-auto
+    }
+    .nav-bar-link{
+        @apply  text-gray-700 hover:text-indigo-600 text-sm
     }
 }
