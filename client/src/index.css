@@ -3,7 +3,32 @@
 @tailwind utilities;
 
 @layer base {
+    #root{
+        @apply bg-aliceblue-100 md:pt-7
+    }
     .outlet-area{
-        @apply bg-slate-400 w-[95vw] mx-auto
+        @apply w-full mx-auto
+    }
+    .nav-bar-link{
+        @apply  text-gray-700 hover:text-indigo-600 text-sm
+    }
+    .rounded-img-sm{
+        @apply inline-block w-10 h-10 rounded-full
+    }
+    .faq-cards-container{
+       @apply flex flex-wrap flex-row justify-between md:gap-[1%] pt-12
+    }
+    .faq-card{
+        @apply bg-white rounded-lg p-5 mt-3 w-full min-h-[250px] md:w-[49%] lg:w-[32.33333%] 
+        shadow-lg shadow-slate-600
+    }
+    .faq-card-img{
+        @apply w-[55px] h-[55px]
+    }
+    .faq-card-title{
+        @apply font-bold text-2xl my-3
+    }
+    .faq-card-body{
+        @apply text-gray-200
     }
 }
