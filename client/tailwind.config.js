@@ -18,6 +18,7 @@ export default {
         },
         "off-white": "#FAFAFB",
         "dark-blue": "#060640",
+        "goldenred": "#FEC536"
       }
     },
   },
