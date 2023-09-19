@@ -6,7 +6,7 @@ export default function MainNavbar() {
       {/* Header */}
       <header>
         {/* navbar and menu */}
-        <nav className="shadow mx-auto rounded-lg bg-white md:w-[90vw] md:mb-7">
+        <nav className="shadow mx-auto rounded-lg bg-white md:w-[90vw] mb-5 md:mb-7">
           <div className="flex justify-between items-center py-6 px-10 container mx-auto">
             <div>
               <h1 className="text-2xl font-bold bg-gradient-to-tr to-green-600 bg-clip-text text-transparent hover:cursor-pointer">
@@ -54,7 +54,7 @@ export default function MainNavbar() {
                   <h1 className="text-text-gray-600  py-2 hover:cursor-pointer hover:text-indigo-600">
                     <Link to="/login">Sign In</Link>
                   </h1>
-                  <h1 className="text-white bg-primary py-3 hover:cursor-pointer px-4 rounded hover:shadow-lg">
+                  <h1 className="text-white bg-primary py-3 hover:cursor-pointer px-4 rounded hover:bg-softgreen">
                     <Link to="/register">Get Started</Link>
                   </h1>
                 </div>
