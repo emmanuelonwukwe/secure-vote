@@ -31,4 +31,10 @@
     .faq-card-body{
         @apply text-gray-200
     }
+    .page-title{
+        @apply text-center font-sans font-bold text-2xl bg-gray-100 max-w-[200px] mx-auto p-2 rounded-2xl
+    }
+    .page-title-first{
+        @apply text-softgreen
+    }
 }
