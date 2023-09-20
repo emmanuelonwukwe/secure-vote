@@ -7,7 +7,7 @@ import { useNavigation } from "react-router-dom";
 
 export default function MainLayout() {
     const navigation = useNavigation();
-    const [isSpinning, setIsSpinning] = useState(true);
+    const [isSpinning, setIsSpinning] = useState(false);
 
     setTimeout(() => {
         setIsSpinning(false);
