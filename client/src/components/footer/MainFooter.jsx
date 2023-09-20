@@ -20,8 +20,8 @@ export default function MainFooter() {
               </div>
               <div className="flex flex-col mx-auto mt-6 space-y-3 md:space-y-0">
                 <p className="text-white text-sm">
-                  This is a big one and i consider it one of the most <br />
-                  important things for a business.
+                  This is a big one and we consider it one of the most <br />
+                important electronic app.
                 </p>
                 <div className="pt-5">
                   <img  src="/images/fb-icon.svg"/>
