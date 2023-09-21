@@ -1,22 +1,41 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import axiosRequest from "../requests/axios-request";
+import SnackBar from "../components/alerts/SnackBar";
+import useMessage from "../hooks/useMessage";
 
 export default function Register() {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ role: "user" });
+  const { message, setMessage, openSnackBar, type, setType } = useMessage();
 
   // This adds updates the formData to add the input field
- const handleInputChange = (event) => {
+  const handleInputChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setFormData((oldFormData) => ({...oldFormData, [name]:value}))
-  }
+    setFormData((oldFormData) => ({ ...oldFormData, [name]: value }));
+  };
 
-  const handleSignUpSubmit = (event) => {
+  const handleSignUpSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(formData);
-  }
+    try {
+      // Send the request to the server
+      const response = await axiosRequest.post("/signup", formData);
+
+      // Save the token to the user localStorage
+      localStorage.setItem("jwt_token", response.data.token);
+      
+      // Show user success message
+      setMessage(response.data.message);
+      setType("Success");
+      openSnackBar();
+    } catch (xhr) {
+      // Show user error message
+      setMessage(xhr.response.data.message);
+      setType("failed");
+      openSnackBar();
+    }
+  };
 
   return (
     <>
@@ -24,6 +43,7 @@ export default function Register() {
         <h1 className="page-title">
           <span className="page-title-first">Sign</span> Up
         </h1>
+        <SnackBar message={message} type={type} />
         <div className="grid grid-cols-1 md:grid-cols-2 justify-center justify-items-center">
           <div className="border p-3 mt-3 rounded-2xl">
             <form method="POST" onSubmit={handleSignUpSubmit}>
@@ -37,8 +57,9 @@ export default function Register() {
                       First Name
                     </label>
                     <input
-                    onChange={handleInputChange}
-                    defaultValue=''
+                      autoFocus="autofocus"
+                      onChange={handleInputChange}
+                      defaultValue=""
                       type="text"
                       name="first_name"
                       id="fName"
@@ -56,8 +77,8 @@ export default function Register() {
                       Last Name
                     </label>
                     <input
-                    onChange={handleInputChange}
-                    defaultValue=''
+                      onChange={handleInputChange}
+                      defaultValue=""
                       type="text"
                       name="last_name"
                       id="lName"
@@ -75,13 +96,12 @@ export default function Register() {
                   email
                 </label>
                 <input
-                 onChange={handleInputChange}
-                 defaultValue=''
+                  onChange={handleInputChange}
+                  defaultValue=""
                   type="email"
                   name="email"
                   id="guest"
                   placeholder="example@mail.com"
-                 
                   className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                 />
               </div>
@@ -95,12 +115,12 @@ export default function Register() {
                       Phone
                     </label>
                     <input
-                     onChange={handleInputChange}
-                     defaultValue=''
+                      onChange={handleInputChange}
+                      defaultValue=""
                       type="text"
                       name="phone"
                       id="fName"
-                      placeholder="First Name"
+                      placeholder="Phone number"
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
@@ -114,10 +134,11 @@ export default function Register() {
                       Role
                     </label>
                     <select
-                     onChange={handleInputChange}
-                     defaultValue=''
-                    name="role"
-                    className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+                      onChange={handleInputChange}
+                      defaultValue=""
+                      name="role"
+                      className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    >
                       <option value="user">User</option>
                       <option value="admin">Admin</option>
                     </select>
@@ -134,8 +155,8 @@ export default function Register() {
                       Password
                     </label>
                     <input
-                     onChange={handleInputChange}
-                     defaultValue=''
+                      onChange={handleInputChange}
+                      defaultValue=""
                       type="password"
                       name="password"
                       placeholder="Enter password"
@@ -153,8 +174,8 @@ export default function Register() {
                       Confirm password
                     </label>
                     <input
-                     onChange={handleInputChange}
-                     defaultValue=''
+                      onChange={handleInputChange}
+                      defaultValue=""
                       type="password"
                       name="password_confirmation"
                       placeholder="Re-enter password"
@@ -170,7 +191,13 @@ export default function Register() {
                 </button>
               </div>
               <div className="mt-5">
-                <p><span className="mr-3 text-md">Already have an account?</span> <Link to="/login" className="text-blue-500"> Login</Link> </p>
+                <p>
+                  <span className="mr-3 text-md">Already have an account?</span>{" "}
+                  <Link to="/login" className="text-blue-500">
+                    {" "}
+                    Login
+                  </Link>{" "}
+                </p>
               </div>
             </form>
           </div>
