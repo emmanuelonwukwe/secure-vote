@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
+import MainMobileDrawer from "./drawers/MainMobileDrawer";
+import useDrawerHelper from "../../hooks/useDrawerhelper";
 
 export default function MainNavbar() {
-  // Navbar
+  const {openDrawer} = useDrawerHelper();
+
   return (
     <>
+    <MainMobileDrawer />
       {/* Header */}
       <header>
         {/* navbar and menu */}
@@ -18,7 +22,7 @@ export default function MainNavbar() {
               </h1>
             </div>
             <div>
-              <div className="hover:cursor-pointer sm:hidden">
+              <div className="hover:cursor-pointer sm:hidden" onClick={openDrawer}>
                 <span className="h-1 rounded-full block w-8 mb-1 bg-gradient-to-tr from-indigo-600 to-green-600" />
                 <span className="h-1 rounded-full block w-8 mb-1 bg-gradient-to-tr from-indigo-600 to-green-600" />
                 <span className="h-1 rounded-full block w-8 mb-1 bg-gradient-to-tr from-indigo-600 to-green-600" />
