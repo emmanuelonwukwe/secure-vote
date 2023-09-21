@@ -5,8 +5,9 @@ import Warning from "./Warning";
 // eslint-disable-next-line react/prop-types
 export default function SnackBar({ message, type }) {
   let alertBox = undefined;
+  const messageType = type.toString().toLowerCase();
 
-  switch (type) {
+  switch (messageType) {
     case "success":
       alertBox = <Success message={message} />;
       break;

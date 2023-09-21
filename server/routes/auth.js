@@ -7,12 +7,13 @@ const router = express.Router();
 // The registration route for new users
 router.post("/signup", async (req, res) => {
   try {
-    const { userData } = req.body;
+    const userData  = req.body;
 
-    await RegisterController.register(userData);
+    const token = await RegisterController.register(userData);
 
     res.status(200).json({
-        message: "Successfully registered"
+        message: "Successfully registered",
+        token: token,
     });
   } catch (error) {
     handleCaughtErrorRes(error, res);

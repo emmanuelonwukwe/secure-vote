@@ -21,7 +21,16 @@ export default function Register() {
     try {
       // Send the request to the server
       const response = await axiosRequest.post("/signup", formData);
+
+      // Save the token to the user localStorage
+      localStorage.setItem("jwt_token", response.data.token);
+      
+      // Show user success message
+      setMessage(response.data.message);
+      setType("Success");
+      openSnackBar();
     } catch (xhr) {
+      // Show user error message
       setMessage(xhr.response.data.message);
       setType("failed");
       openSnackBar();
@@ -48,6 +57,7 @@ export default function Register() {
                       First Name
                     </label>
                     <input
+                      autoFocus="autofocus"
                       onChange={handleInputChange}
                       defaultValue=""
                       type="text"
@@ -110,7 +120,7 @@ export default function Register() {
                       type="text"
                       name="phone"
                       id="fName"
-                      placeholder="First Name"
+                      placeholder="Phone number"
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
