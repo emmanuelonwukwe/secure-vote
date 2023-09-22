@@ -11,6 +11,7 @@ import RecoverPassword from './pages/RecoverPassword'
 import About from './pages/About'
 import Services from './pages/Services'
 import Contact from './pages/Contact'
+import Dashboard from './pages/Dashboard'
 
 // Create the router for the pages
 const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: '/contact',
         element: <Contact />
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard />
       },
     ]
   },
