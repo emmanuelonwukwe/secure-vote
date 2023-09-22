@@ -49,13 +49,11 @@ class BaseModel {
 
     /**
      * This retrieve specific data based on the codition from the model table
-     * @param {string} condition - The where condition for the data retrieval
+     * @param { postgres.Sql } condition - The where condition for the data retrieval eg ...where(sql`email=${email}`)
      */
     async where(condition) {
-        // The partial query to be added to the main qry
-        const partialQry = (condition) => sql`${condition}`;
 
-        const models = await sql`SELECT * FROM ${sql(this.table)} WHERE ${partialQry(condition)}`;
+        const models = await sql`SELECT * FROM ${sql(this.table)} WHERE ${condition}`;
 
         return models;
     }
@@ -63,7 +61,7 @@ class BaseModel {
     /**
      * This helps to updata a data
      * @param {object} data - The object of the model to be updated
-     * @param {object} condition - The where condition of the model to be updated
+     * @param {postgres.Sql} condition - The where condition of the model to be updated
      */
     async update(data, condition) {
         // Only accept object to be inserted to the db
@@ -81,35 +79,31 @@ class BaseModel {
             }
         });
 
-        // The partial query to be added to the main qry
-        const partialQry = (condition) => sql`${condition}`;
-        const updatedModel = await sql`UPDATE ${sql(this.table)} SET ${sql(data)} WHERE ${partialQry(condition)} RETURNING *`;
+        const updatedModel = await sql`UPDATE ${sql(this.table)} SET ${sql(data)} WHERE ${condition} RETURNING *`;
 
         return updatedModel;
     }
 
     /**
      * Helps to delete a model from the table
-     * @param {object} condition - The where condition of the model to be deleted
+     * @param {postgres.Sql} condition - The where condition of the model to be deleted
      */
     async delete(condition) {
-        // The partial query to be added to the main qry
-        const partialQry = (condition) => sql`${condition}`;
-        const deletedModel = await sql`DELETE FROM ${sql(this.table)} WHERE ${partialQry(condition)} RETURNING *`;
+        this.#modelTableIsSpecified();
+
+        const deletedModel = await sql`DELETE FROM ${sql(this.table)} WHERE ${condition} RETURNING *`;
 
         return deletedModel;
     }
 
     /**
      * This function checks if model exists in the database based on the given condition
-     * @param {object} condition - The clause that follows where statement of the sql query
+     * @param {postgres.Sql} condition - The clause that follows where statement of the sql query
      */
     async modelExists(condition) {
         this.#modelTableIsSpecified();
 
-        // The partial query to be added to the main qry
-        const partialQry = (condition) => sql`${condition}`;
-        const model = await sql`SELECT * FROM ${sql(this.table)} WHERE ${partialQry(condition)}`;
+        const model = await sql`SELECT * FROM ${sql(this.table)} WHERE ${condition}`;
 
         if (model.length > 0) {
             return true
@@ -120,13 +114,12 @@ class BaseModel {
 
     /**
      * This function counts the total from a table based on the condition
+     * @param {postgres.Sql} condition 
      */
     async count(condition) {
-        // The partial query to be added to the main qry
-        const partialQry = (condition) => sql`${condition}`;
-        const count = await sql`SELECT COUNT(*) as total FROM ${sql(this.table)} WHERE ${partialQry(condition)}`;
+        const count = await sql`SELECT COUNT(*) AS total FROM ${sql(this.table)} WHERE ${condition}`;
 
-        return count;
+        return count[0].total;
     }
 
     /**
@@ -134,11 +127,9 @@ class BaseModel {
      * @param {string} col - The column to sum
      */
     async sum(col, condition) {
-        // The partial query to be added to the main qry
-        const partialQry = (condition) => sql`${condition}`;
-        const sum = await sql`SELECT SUM(${col}) as total FROM ${sql(this.table)} WHERE ${partialQry(condition)}`;
+        const sum = await sql`SELECT SUM(${sql(col)}) AS total FROM ${sql(this.table)} WHERE ${condition}`;
 
-        return sum;
+        return sum[0].total;
     }
 
     /**
@@ -146,11 +137,9 @@ class BaseModel {
      * @param {string} col - The column to sum
      */
     async min(col, condition) {
-        // The partial query to be added to the main qry
-        const partialQry = (condition) => sql`${condition}`;
-        const min = await sql`SELECT MIN(${col}) as total FROM ${sql(this.table)} WHERE ${partialQry(condition)}`;
+        const min = await sql`SELECT MIN(${sql(col)}) AS minimum FROM ${sql(this.table)} WHERE ${condition}`;
 
-        return min;
+        return min[0].minimum.toString();
     }
 
     /**
@@ -158,11 +147,9 @@ class BaseModel {
      * @param {string} col - The column to sum
      */
     async max(col, condition) {
-        // The partial query to be added to the main qry
-        const partialQry = (condition) => sql`${condition}`;
-        const max = await sql`SELECT MAX(${col}) as total FROM ${sql(this.table)} WHERE ${partialQry(condition)}`;
+        const max = await sql`SELECT MAX(${sql(col)}) as maxi FROM ${sql(this.table)} WHERE ${condition}`;
 
-        return max;
+        return max[0].maxi.toString();
     }
 
     /**
