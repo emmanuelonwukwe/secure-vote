@@ -3,6 +3,7 @@ import ApiException from "../../Exceptions/ApiException.js";
 import User from "../../Models/User.js";
 import Controller from "./Controller.js";
 import jwt from 'jsonwebtoken';
+import sql from "../../../config/db.js";
 
 class RegisterController extends Controller {
   /**
@@ -67,6 +68,14 @@ class RegisterController extends Controller {
     const token = jwt.sign(newUser[0], secretKey);
 
     return token
+  }
+
+  static async testApi(){
+    const user = new User();
+    let emma = "a@a.co";
+    const response = await user.max("id", sql`1=1`);
+
+    return response;
   }
 }
 
