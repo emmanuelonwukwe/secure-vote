@@ -35,6 +35,18 @@ router.get("/pg-version", AdminOnlyMiddleware.handle, async (req, res) => {
     }
 });
 
+router.get("/create-db-tables", AdminOnlyMiddleware.handle, async (req, res) => {
+    try {
+        const pgController = new PgController(req, res);
+        await pgController.createDatabaseTables();
+        res.json({
+            message: "Database tables created successfully"
+        });
+    } catch (error) {
+        handleCaughtErrorRes(error, res)
+    }
+});
+
 
 // This is an unknown route
 router.get("*", (req, res) => {
