@@ -8,7 +8,7 @@ class AdminOnlyMiddleware extends BaseMiddleware {
     role = this.getRole();
 
     getRole() {
-        return "user";
+        return "admin";
     }
 
     // Assign this as a callback to the route that needs this middleware
