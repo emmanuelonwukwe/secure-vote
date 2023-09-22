@@ -1,6 +1,7 @@
 import express from "express";
 import RegisterController from "../app/Http/Controllers/RegisterController.js";
 import handleCaughtErrorRes from "../helpers/caught-error-handler.js";
+import LoginController from "../app/Http/Controllers/LoginController.js";
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ router.post("/signup", async (req, res) => {
   try {
     const userData = req.body;
 
-    const token = await RegisterController.register(userData);
+    const token = await RegisterController.signup(userData);
 
     res.status(200).json({
       message: "Successfully registered",
@@ -20,21 +21,30 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// This api handles the login actions
+// The login route for all users
 router.post("/login", async (req, res) => {
-  res.json({
-    message: "Login controller output",
-  });
-});
-
-router.get("/test", async (req, res) => {
   try {
-    const response = await RegisterController.testApi();
-    res.status(200);
-    res.send(response);
+    const userData = req.body;
+
+    const token = await LoginController.authenticate(userData);
+
+    res.status(200).json({
+      message: "Successfully logged in",
+      token: token,
+    });
   } catch (error) {
     handleCaughtErrorRes(error, res);
   }
 });
+
+// router.get("/test", async (req, res) => {
+//   try {
+//     const response = await RegisterController.testApi();
+//     res.status(200);
+//     res.send(response);
+//   } catch (error) {
+//     handleCaughtErrorRes(error, res);
+//   }
+// });
 
 export default router;

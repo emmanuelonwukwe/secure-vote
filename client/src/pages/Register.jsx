@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axiosRequest from "../requests/axios-request";
 import SnackBar from "../components/alerts/SnackBar";
 import useMessage from "../hooks/useMessage";
+import ProgressIndicator from "../components/ProgressIndicator";
 
 export default function Register() {
   const [formData, setFormData] = useState({ role: "user" });
   const { message, setMessage, openSnackBar, type, setType } = useMessage();
+  const [isProcessing, setIsProcessing] = useState(false);
+  const navigate = useNavigate();
 
   // This adds updates the formData to add the input field
   const handleInputChange = (event) => {
@@ -17,6 +20,7 @@ export default function Register() {
 
   const handleSignUpSubmit = async (event) => {
     event.preventDefault();
+    setIsProcessing(true);
 
     try {
       // Send the request to the server
@@ -24,12 +28,21 @@ export default function Register() {
 
       // Save the token to the user localStorage
       localStorage.setItem("jwt_token", response.data.token);
-      
+
+      setIsProcessing(false);
+
       // Show user success message
       setMessage(response.data.message);
       setType("Success");
       openSnackBar();
+
+      // Send the user to the dashboard
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     } catch (xhr) {
+      setIsProcessing(false);
+
       // Show user error message
       setMessage(xhr.response.data.message);
       setType("failed");
@@ -43,6 +56,7 @@ export default function Register() {
         <h1 className="page-title">
           <span className="page-title-first">Sign</span> Up
         </h1>
+        {isProcessing && <ProgressIndicator />}
         <SnackBar message={message} type={type} />
         <div className="grid grid-cols-1 md:grid-cols-2 justify-center justify-items-center">
           <div className="border p-3 mt-3 rounded-2xl">
