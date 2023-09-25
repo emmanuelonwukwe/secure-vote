@@ -11,7 +11,8 @@ import RecoverPassword from './pages/RecoverPassword'
 import About from './pages/About'
 import Services from './pages/Services'
 import Contact from './pages/Contact'
-import Dashboard from './pages/Dashboard'
+import Dashboard from './pages/account/Dashboard'
+import AccountLayout from './layouts/AccountLayout'
 
 // Create the router for the pages
 const router = createBrowserRouter([
@@ -48,12 +49,23 @@ const router = createBrowserRouter([
         path: '/contact',
         element: <Contact />
       },
-      {
-        path: '/dashboard',
-        element: <Dashboard />
-      },
     ]
   },
+  {
+    path: "/account",
+    element: <AccountLayout />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />
+      },
+      {
+        path: "/account/dashboard",
+        element: <Dashboard />
+      }
+    ]
+  }
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
