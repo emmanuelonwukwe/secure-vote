@@ -23,7 +23,6 @@ router.post("/signup", async (req, res) => {
 
 // The login route for all users
 router.post("/login", async (req, res) => {
-  console.log(req.headers)
   try {
     const userData = req.body;
 

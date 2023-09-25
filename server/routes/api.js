@@ -3,6 +3,7 @@ import PgController from "../app/Http/Controllers/PgController.js";
 import ApiException from "../app/Exceptions/ApiException.js";
 import handleCaughtErrorRes from "../helpers/caught-error-handler.js";
 import AdminOnlyMiddleware from "../app/Http/Middlewares/AdminOnlyMiddleware.js";
+import TokenController from "../app/Http/Controllers/TokenController.js";
 
 const router = express.Router();
 
@@ -30,6 +31,24 @@ router.get("/pg-version", AdminOnlyMiddleware.handle, async (req, res) => {
     try {
         const pgController = new PgController(req, res);
         await pgController.getPgVersion();
+    } catch (error) {
+        handleCaughtErrorRes(error, res)
+    }
+});
+
+// This endpoint helps to verify a jwt token sent from the front end
+router.post("/verify-token", async (req, res) => {
+    try {
+        const token = req.headers.Token;
+
+        console.log(req.headers.Token)
+        const payload = TokenController.verifyToken(token);
+
+        // Respond with the user payload
+        res.status(200).json({
+            message: "Token user payload is in the user key",
+            payload
+        });
     } catch (error) {
         handleCaughtErrorRes(error, res)
     }

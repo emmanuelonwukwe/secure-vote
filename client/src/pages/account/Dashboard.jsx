@@ -1,19 +1,18 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import DrawaerUl from "../../components/account/DrawerUl";
 import CancelIcon from "../../components/icons/CancelIcon";
 import useDrawerHelper from "../../hooks/useDrawerhelper";
-import HomeIcon from "../../components/icons/HomeIcon";
-import MapPinIcon from "../../components/icons/MapPinIcon";
-import SigninIcon from "../../components/icons/SigninIcon";
-import InboxIcon from "../../components/icons/InboxIcon";
+import { AuthContext } from "../../contexts/AuthContext";
+
 
 export default function Dashboard() {
   const { closeDrawer } = useDrawerHelper();
+  const {user} = useContext(AuthContext);
 
   return (
     <div className="grid grid-cols-4 gap-6 mx-3">
-      <div className="col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-1">
-        <div className="hidden mb-3 sm:block bg-transparent"
-        >
+      <div className="col-span-1 sm:col-span-2 md:col-span-1">
+        <div className="hidden mb-3 sm:block bg-transparent">
           <div
             id="drawer-body-scrolling"
             className="bg-primary w-full h-screen p-4 rounded-2xl dark:bg-gray-800"
@@ -40,62 +39,25 @@ export default function Dashboard() {
               <span className="sr-only">Close menu</span>
             </button>
             <div className="py-4 overflow-y-auto">
-              <ul className="space-y-2 font-medium">
-                <li>
-                  <Link
-                    to="/"
-                    className="drawer-link"
-                  >
-                    <HomeIcon />
-                    <span className="ml-3 text-gray-400">Home</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/about"
-                    className="drawer-link"
-                  >
-                    <MapPinIcon />
-                    <span className="flex-1 ml-3 whitespace-nowrap text-gray-400">About</span>
-                    <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
-                      us
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/services"
-                    className="drawer-link"
-                  >
-                    <InboxIcon />
-                    <span className="flex-1 ml-3 whitespace-nowrap text-gray-400">
-                      Services
-                    </span>
-                    <span className="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                      3+
-                    </span>
-                  </Link>
-                </li>
-                <li>
-                  <hr className="my-6 border-gray-200 dark:border-gray-700 h-2" />
-                </li>
-                <li>
-                  <Link
-                    to="/register"
-                    className="drawer-link"
-                  >
-                    <SigninIcon />
-                    <span className="flex-1 ml-3 whitespace-nowrap text-gray-400">Logout</span>
-                  </Link>
-                </li>
-              </ul>
+              {/** Drawer ul */}
+              <DrawaerUl />
             </div>
           </div>
         </div>
       </div>
       <div className="col-span-3">
-        <p>Right hand side</p>
+        <div className="flex flex-wrap justify-around items-center">
+          <div className="">
+            <p>First partition {JSON.stringify(user)} </p>
+          </div>
+          <div className="">
+            <p>Second partition</p>
+          </div>
+          <div className="">
+            <p>Third partition</p>
+          </div>
+        </div>
       </div>
     </div>
-  )
+  );
 }

@@ -38,8 +38,8 @@ export default function Register() {
 
       // Send the user to the dashboard
       setTimeout(() => {
-        navigate("/dashboard");
-      }, 2000);
+        navigate("/account/dashboard");
+      }, 1000);
     } catch (xhr) {
       setIsProcessing(false);
 

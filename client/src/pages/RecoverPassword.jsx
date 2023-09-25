@@ -2,7 +2,7 @@
 export default function RecoverPassword() {
   return (
     <div>
-      Recover Password page
+      This is the recover password page
     </div>
   )
 }
