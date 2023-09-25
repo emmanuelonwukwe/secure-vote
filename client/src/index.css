@@ -4,7 +4,7 @@
 
 @layer base {
     #root{
-        @apply bg-aliceblue-100 md:pt-1 overflow-x-hidden
+        @apply bg-aliceblue-100 dark:bg-black md:pt-1 overflow-x-hidden
     }
     .outlet-area{
         @apply w-full mx-auto
