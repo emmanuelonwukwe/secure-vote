@@ -2,8 +2,9 @@
 import { Link, NavLink } from "react-router-dom";
 import MainMobileDrawer from "./drawers/MainMobileDrawer";
 import useDrawerHelper from "../../hooks/useDrawerhelper";
+import SigninIcon from "../icons/SigninIcon";
 
-export default function MainNavbar() {
+export default function AccountNavbar() {
   const { openDrawer } = useDrawerHelper();
 
   return (
@@ -31,51 +32,39 @@ export default function MainNavbar() {
               <div className="flex items-center">
                 <ul className="sm:flex space-x-4 hidden items-center">
                   <li>
-                    <NavLink to="/" className={({ isActive, isPending }) =>
+                    <NavLink to="/account/dashboard" className={({ isActive, isPending }) =>
                       isActive ? "text-green-600" : "nav-bar-link"
                     }>
-                      Home
+                      Dashboard
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/about" className={({ isActive, isPending }) =>
+                    <NavLink to="/account/elections" className={({ isActive, isPending }) =>
                       isActive ? "text-green-600" : "nav-bar-link"
                     }>
-                      About
+                      Elections
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/services" className={({ isActive, isPending }) =>
+                    <NavLink to="/account/analytics" className={({ isActive, isPending }) =>
                       isActive ? "text-green-600" : "nav-bar-link"
                     }>
-                      Services
+                      Analytics
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/reviews" className={({ isActive, isPending }) =>
+                    <NavLink to="/accounts/my-votes" className={({ isActive, isPending }) =>
                       isActive ? "text-green-600" : "nav-bar-link"
                     }>
-                      Reviews
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/contact" className={({ isActive, isPending }) =>
-                      isActive ? "text-green-600" : "nav-bar-link"
-                    }>
-                      Support
+                      My votes
                     </NavLink>
                   </li>
                 </ul>
                 <div className="md:flex items-center hidden space-x-4 ml-8 lg:ml-12">
-                  <h1 className="text-gray-600 md:text-sm font-bold py-2 hover:cursor-pointer hover:text-indigo-600">
-                    <NavLink to="/login" className={({ isActive, isPending }) =>
-                      isActive ? "text-green-600" : ""
-                    }>Sign In</NavLink>
-                  </h1>
-                  <h1 className="text-primary bg-white py-1 md:text-sm hover:cursor-pointer px-4 rounded hover:bg-softgreen">
+                  <h1 className="text-gray-400 font-bold bg-red-300 py-1 md:text-sm hover:cursor-pointer px-2 rounded hover:bg-softgreen">
                     <NavLink to="/register"className={({ isActive, isPending }) =>
-                      isActive ? "text-green-600" : ""
-                    }>Get Started</NavLink>
+                      isActive ? "text-green-600" : "inline-flex"
+                    }><SigninIcon />&nbsp;Logout</NavLink>
                   </h1>
                 </div>
               </div>

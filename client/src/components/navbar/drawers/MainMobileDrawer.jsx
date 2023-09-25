@@ -21,7 +21,7 @@ export default function MainMobileDrawer() {
       >
         <div
           id="drawer-body-scrolling"
-          className="absolute top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto bg-white dark:bg-gray-800"
+          className="absolute top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto bg-primary dark:bg-gray-800"
         >
           <h5
             id="drawer-body-scrolling-label"
@@ -29,9 +29,9 @@ export default function MainMobileDrawer() {
           >
             <i className="text-2xl font-bold bg-gradient-to-tr to-green-600 bg-clip-text text-transparent hover:cursor-pointer">
               <span className="text-softgreen text-3xl">S</span>
-              <span className="text-primary text-xl">ecure</span>
+              <span className="text-white text-xl">ecure</span>
               <span className="text-softgreen text-xl">V</span>
-              <span className="text-primary text-xl">ote</span>
+              <span className="text-white text-xl">ote</span>
             </i>
           </h5>
           <button
@@ -52,7 +52,7 @@ export default function MainMobileDrawer() {
                   className="drawer-link"
                 >
                   <HomeIcon />
-                  <span className="ml-3">Home</span>
+                  <span className="ml-3 text-gray-400">Home</span>
                 </Link>
               </li>
               <li>
@@ -61,7 +61,7 @@ export default function MainMobileDrawer() {
                   className="drawer-link"
                 >
                   <MapPinIcon />
-                  <span className="flex-1 ml-3 whitespace-nowrap">About</span>
+                  <span className="flex-1 ml-3 whitespace-nowrap text-gray-400">About</span>
                   <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
                     us
                   </span>
@@ -73,7 +73,7 @@ export default function MainMobileDrawer() {
                   className="drawer-link"
                 >
                   <InboxIcon />
-                  <span className="flex-1 ml-3 whitespace-nowrap">
+                  <span className="flex-1 ml-3 whitespace-nowrap text-gray-400">
                     Services
                   </span>
                   <span className="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
@@ -87,7 +87,7 @@ export default function MainMobileDrawer() {
                   className="drawer-link"
                 >
                   <RocketLaunchIcon />
-                  <span className="flex-1 ml-3 whitespace-nowrap">Reviews</span>
+                  <span className="flex-1 ml-3 whitespace-nowrap text-gray-400">Reviews</span>
                 </Link>
               </li>
               <li>
@@ -96,7 +96,7 @@ export default function MainMobileDrawer() {
                   className="drawer-link"
                 >
                   <ChatBubbleIcon />
-                  <span className="flex-1 ml-3 whitespace-nowrap">Support</span>
+                  <span className="flex-1 ml-3 whitespace-nowrap text-gray-400">Support</span>
                 </Link>
               </li>
               <li>
@@ -105,7 +105,7 @@ export default function MainMobileDrawer() {
                   className="drawer-link"
                 >
                   <SigninIcon />
-                  <span className="flex-1 ml-3 whitespace-nowrap">Sign In</span>
+                  <span className="flex-1 ml-3 whitespace-nowrap text-gray-400">Sign In</span>
                 </Link>
               </li>
               <li>
@@ -114,7 +114,7 @@ export default function MainMobileDrawer() {
                   className="drawer-link"
                 >
                   <SignupIcon />
-                  <span className="flex-1 ml-3 whitespace-nowrap">Sign Up</span>
+                  <span className="flex-1 ml-3 whitespace-nowrap text-gray-400">Sign Up</span>
                 </Link>
               </li>
             </ul>

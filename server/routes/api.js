@@ -35,6 +35,22 @@ router.get("/pg-version", AdminOnlyMiddleware.handle, async (req, res) => {
     }
 });
 
+// This endpoint helps the admin to generate a jwt secret token
+router.get("/generate-jwt-secret", AdminOnlyMiddleware.handle, async (req, res) => {
+    try {
+        const secret = PgController.generateJwtSecret();
+
+        // Show the secret to the user
+        res.json({
+            message: "Your jwt secret is shown below",
+            secret
+        });
+    } catch (error) {
+        handleCaughtErrorRes(error, res)
+    }
+})
+
+// This helps the admin to migrate the db tables
 router.get("/create-db-tables", AdminOnlyMiddleware.handle, async (req, res) => {
     try {
         const pgController = new PgController(req, res);
