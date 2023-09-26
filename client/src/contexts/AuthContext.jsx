@@ -15,29 +15,19 @@ export function AuthContextProvider({ children }) {
         logout();
       } else {
         try {
-          const response = await axiosRequest.post("/verify-token", {
-            headers: {
-                Token: "hhehee"
-            }
-          });
-          
+          const response = await axiosRequest.get("/verify-token");
+
           const payload = response.data.payload;
           const user = payload.data;
-          const expirySec = payload.exp;
-          const currentTimeInSeconds = Math.floor(Date.now() / 1000);
-          const diff = expirySec - currentTimeInSeconds;
+          //const expirySec = payload.exp;
+          //const currentTimeInSeconds = Math.floor(Date.now() / 1000);
+          // const diff = expirySec - currentTimeInSeconds;
 
-          // Check if token has not expired
-          if (diff > 0) {
-            if (Object.keys(user).length > 0) {
-              startSessionTimer();
-              setIsAuth(true);
-              setUser(user);
-            }
-          } else {
-            logout();
-          }
-
+          
+            startSessionTimer();
+            setIsAuth(true);
+            setUser(user);
+          
           window.addEventListener("focus", startSessionTimer);
         } catch (error) {
           console.log("Unable to verify token");
@@ -46,7 +36,7 @@ export function AuthContextProvider({ children }) {
     };
 
     verifyToken();
-  }, [localStorage]);
+  }, []);
 
   // Add event listener for logout functionality
   const logout = () => {

@@ -37,11 +37,10 @@ router.get("/pg-version", AdminOnlyMiddleware.handle, async (req, res) => {
 });
 
 // This endpoint helps to verify a jwt token sent from the front end
-router.post("/verify-token", async (req, res) => {
+router.get("/verify-token", async (req, res) => {
     try {
-        const token = req.headers.Token;
+        const token = req.headers.token;
 
-        console.log(req.headers.Token)
         const payload = TokenController.verifyToken(token);
 
         // Respond with the user payload
