@@ -11,7 +11,8 @@ class PgController extends Controller {
   }
 
   async createDatabaseTables() {
-    await migrateUp()
+    await migrateUp();
+    //migrateDown()
   }
 
 // This helps to get the postgress database version

@@ -1,19 +1,29 @@
-import { Link } from "react-router-dom";
-import HomeIcon from "../icons/HomeIcon";
+import { Link, useNavigate } from "react-router-dom";
 import SigninIcon from "../icons/SigninIcon";
 import InboxIcon from "../icons/InboxIcon";
 import MoonIcon from "../icons/MoonIcon";
 import DashboardIcon from "../icons/DashboardIcon";
 import { useContext } from "react";
 import { ThemeContext } from "../../contexts/themeContext";
+import { useAuth } from "../../contexts/AuthContext";
+import ChatBarIcon from "../icons/ChatBarIcon";
+import CheckBadgeIcon from "../icons/CheckBadgeIcon";
+import ChatBubbleLeft from "../icons/ChatBubbleLeft";
 
-export default function DrawaerUl() {
-  const {darkMode, toggleDarkMode } = useContext(ThemeContext)
+export default function DrawerUl() {
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  }
 
   return (
     <ul className="space-y-2 font-medium">
       <li>
-        <Link to="/" className="drawer-link">
+        <Link to="/account/dashboard" className="drawer-link">
           <DashboardIcon />
           <span className="ml-3 text-gray-400">Dashboard</span>
         </Link>
@@ -31,19 +41,19 @@ export default function DrawaerUl() {
       </li>
       <li>
         <Link to="/" className="drawer-link">
-          <HomeIcon />
+          <ChatBarIcon />
           <span className="ml-3 text-gray-400">Analytics</span>
         </Link>
       </li>
       <li>
         <Link to="/" className="drawer-link">
-          <HomeIcon />
+          <CheckBadgeIcon />
           <span className="ml-3 text-gray-400">Votes</span>
         </Link>
       </li>
       <li>
         <Link to="/" className="drawer-link">
-          <HomeIcon />
+          <ChatBubbleLeft />
           <span className="ml-3 text-gray-400">Comments</span>
         </Link>
       </li>
@@ -51,7 +61,7 @@ export default function DrawaerUl() {
         <hr className="my-6 border-gray-200 dark:border-gray-700 h-2" />
       </li>
       <li>
-        <Link to="/register" className="drawer-link">
+        <Link to="#" className="drawer-link" onClick={handleLogout}>
           <SigninIcon />
           <span className="flex-1 ml-3 whitespace-nowrap text-gray-400">
             Logout

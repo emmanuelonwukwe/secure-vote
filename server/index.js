@@ -1,8 +1,9 @@
 
 import express from "express";
 import SetAppGlobalMiddlewares from "./app/Http/Middlewares/SetAppGlobalMiddlewares.js";
-import apiRouter from "./routes/api.js";
 import handleCaughtErrorRes from "./helpers/caught-error-handler.js";
+import electionRouter from './routes/election.js'
+import apiRouter from "./routes/api.js";
 import authRouter from "./routes/auth.js";
 
 // The express object
@@ -14,6 +15,7 @@ new SetAppGlobalMiddlewares(app);
 // Set the router
 const baseUrl = "/api/v1";
 app.use(baseUrl, authRouter);
+app.use(baseUrl, electionRouter);
 
 // The last router handles unknown routes
 app.use(baseUrl, apiRouter);

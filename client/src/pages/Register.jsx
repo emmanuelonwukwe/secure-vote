@@ -4,12 +4,14 @@ import axiosRequest from "../requests/axios-request";
 import SnackBar from "../components/alerts/SnackBar";
 import useMessage from "../hooks/useMessage";
 import ProgressIndicator from "../components/ProgressIndicator";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Register() {
-  const [formData, setFormData] = useState({ role: "user" });
+  const [formData, setFormData] = useState({ role: "voter" });
   const { message, setMessage, openSnackBar, type, setType } = useMessage();
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
+  const { fetchTokenUser } = useAuth();
 
   // This adds updates the formData to add the input field
   const handleInputChange = (event) => {
@@ -28,6 +30,9 @@ export default function Register() {
 
       // Save the token to the user localStorage
       localStorage.setItem("jwt_token", response.data.token);
+
+      // Fetch the token user and log him in
+      await fetchTokenUser();
 
       setIsProcessing(false);
 
@@ -153,8 +158,8 @@ export default function Register() {
                       name="role"
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     >
-                      <option value="user">User</option>
-                      <option value="admin">Admin</option>
+                      <option value="voter">Voter</option>
+                      <option value="manager">Electoral Manager</option>
                     </select>
                   </div>
                 </div>

@@ -4,12 +4,14 @@ import useMessage from "../hooks/useMessage";
 import SnackBar from "../components/alerts/SnackBar";
 import axiosRequest from "../requests/axios-request";
 import ProgressIndicator from "../components/ProgressIndicator";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Login() {
   const [formData, setFormData] = useState({});
   const { message, setMessage, openSnackBar, type, setType } = useMessage();
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
+  const { fetchTokenUser } = useAuth();
 
   // This adds updates the formData to add the input field
   const handleInputChange = (event) => {
@@ -28,6 +30,9 @@ export default function Login() {
 
       // Save the token to the user localStorage
       localStorage.setItem("jwt_token", response.data.token);
+
+      // Fetch the token user and log him in
+      await fetchTokenUser()
 
       setIsProcessing(false);
 
@@ -70,6 +75,7 @@ export default function Login() {
                 </label>
                 <input
                   onChange={handleInputChange}
+                  defaultValue={formData.email}
                   type="email"
                   name="email"
                   id="guest"
