@@ -102,7 +102,7 @@ class RegisterController extends Controller {
       secretKey
     );
 
-    return token;
+    return { token, user: newUser[0] };
   }
 
   //   static async testApi(){

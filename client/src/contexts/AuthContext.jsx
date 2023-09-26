@@ -11,6 +11,7 @@ export function AuthContextProvider({ children }) {
       // Check if the theme is not set
       if (!localStorage.getItem("jwt_token")) {
         logout();
+        throw new Error("Token not set on the user device");
       } else {
         try {
           const response = await axiosRequest.get("/verify-token");
@@ -21,12 +22,9 @@ export function AuthContextProvider({ children }) {
           //const currentTimeInSeconds = Math.floor(Date.now() / 1000);
           // const diff = expirySec - currentTimeInSeconds;
 
-          if (Object.keys(user).length < 1) {
-            throw new Error("Invalid token data")
+          if (user && Object.keys(user).length > 0) {
+            login(user);
           }
-
-          login(user);
-          return user;
         } catch (error) {
           throw new Error("Unable to verify token");
         }

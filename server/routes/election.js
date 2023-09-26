@@ -9,8 +9,9 @@ const router = express.Router();
 router.post("/create-election-space", MustVerifyTokenMiddleware.handle, async (req, res) => {
   try {
     const electionData = req.body;
+    const token = req.headers.token;
 
-    const token = await ElectionController.createSpace(electionData);
+    await ElectionController.createSpace(electionData, token);
 
     res.status(200).json({
       message: "Election space successfully created",

@@ -13,13 +13,13 @@ class TokenController extends Controller {
     }
 
     // verify a token symmetric
-    return jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
+    return jwt.verify(token, process.env.JWT_SECRET, function (err, payload) {
       if (err) {
         return {};
       }
 
-      // return the user
-      return user;
+      // return the user payload
+      return payload;
     });
   }
 }

@@ -4,13 +4,15 @@ import Controller from "./Controller.js";
 import jwt from "jsonwebtoken";
 import sql from "../../../config/db.js";
 import bcrypt from "bcryptjs";
+import UserController from "./UserController.js";
 
 class ElectionController extends Controller {
   /**
    * This is the function to be called to create an election space
    * @param {object} data - The object of the election
+   * @param {string} token - The token the user sent along the request header
    */
-  static async createSpace(data) {
+  static async createSpace(data, token) {
     // Validate the inputs
     if (
       !Object.prototype.hasOwnProperty.call(data, "title") ||
@@ -27,50 +29,34 @@ class ElectionController extends Controller {
     }
 
     if (
-        !Object.prototype.hasOwnProperty.call(data, "candidates") ||
-        data.candidates === ""
-      ) {
-        throw new ApiException("Candidates field is required", 400);
-      }
+      !Object.prototype.hasOwnProperty.call(data, "candidates") ||
+      data.candidates === ""
+    ) {
+      throw new ApiException("Candidates field is required", 400);
+    }
 
     // Create an election instance
     const election = new Election();
 
-    // Check if this user exists in the system
-    if (await user.modelExists(sql`title = ${data.title}`)) {
+    // The authenticated user
+    const userController = new UserController(token);
+    const authUserId = userController.getId();
+
+    // Check if this user has this same election title in the system
+    if (await user.modelExists(sql`title = ${data.title} AND id = ${authUserId}`)) {
       throw new ApiException("Invalid details supplied");
     }
 
-    // Get the user password from the databas
-    const userRow = await user.where(sql`email = ${data.email}`);
-    const userHashedPassword = userRow[0].password;
+    // Convert the candidates and voting requirements to array
+    data.candidates = data.candidates.split(",")
 
-    const passwordMatched = await bcrypt.compare(data.password, userHashedPassword);
-
-
-    // Check if the email and the password match
-    const userExists = await user.modelExists(
-      sql`email = ${data.email}`
-    );
-
-    if (!userExists || !passwordMatched) {
-      throw new ApiException("Invalid email or password", 409);
+    if (data.voting_requirements !== null) {
+      data.voting_requirements = data.voting_requirements.split(",");
     }
 
-    // Authenticated the user to db
-    const authUser = userRow[0];
+    const newElection = await election.create(data);
 
-    // Sign the authenticated user and return the token
-    const secretKey = process.env.JWT_SECRET;
-    const token = jwt.sign(
-      {
-        exp: Math.floor(Date.now() / 1000) + 60 * 60,
-        data: authUser,
-      },
-      secretKey
-    );
-
-    return token;
+    return true;
   }
 }
 

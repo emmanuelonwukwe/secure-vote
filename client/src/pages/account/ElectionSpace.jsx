@@ -37,8 +37,13 @@ export default function ElectionSpace() {
     setIsProcessing(true);
 
     try {
+      const token = localStorage.getItem("jwt_token");
       // Send the request to the server
-      const response = await axiosRequest.post("/create-election-space", formData);
+      const response = await axiosRequest.post("/create-election-space", formData, {
+        headers: {
+          "token": token
+        }
+      });
 
       setIsProcessing(false);
 

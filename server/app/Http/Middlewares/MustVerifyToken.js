@@ -3,12 +3,6 @@ import BaseMiddleware from "./BaseMiddleware.js";
 import TokenController from "../Controllers/TokenController.js";
 
 class MustVerifyTokenMiddleware extends BaseMiddleware {
-    role = this.getRole();
-
-    getRole() {
-        return "admin";
-    }
-
     // Assign this as a callback to the route that needs this middleware
     static handle(req, res, next) {
         const $this = new MustVerifyTokenMiddleware();

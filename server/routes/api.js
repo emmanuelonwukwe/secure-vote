@@ -40,7 +40,6 @@ router.get("/pg-version", AdminOnlyMiddleware.handle, async (req, res) => {
 router.get("/verify-token", async (req, res) => {
     try {
         const token = req.headers.token;
-
         const payload = TokenController.verifyToken(token);
 
         // Respond with the user payload
