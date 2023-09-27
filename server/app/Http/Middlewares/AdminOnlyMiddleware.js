@@ -2,7 +2,7 @@ import BaseMiddleware from "./BaseMiddleware.js";
 import ApiException from "../../Exceptions/ApiException.js";
 
 /**
- * The global app middlewares are registered here
+ * The middleware only for admin role
  */
 class AdminOnlyMiddleware extends BaseMiddleware {
     role = this.getRole();

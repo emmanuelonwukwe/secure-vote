@@ -15,6 +15,7 @@ import Dashboard from "./pages/account/Dashboard";
 import AccountLayout from "./layouts/AccountLayout";
 import { ThemeContextProvider } from "./contexts/themeContext";
 import { AuthContextProvider } from "./contexts/AuthContext";
+import ElectionSpace from "./pages/account/ElectionSpace";
 
 // Create the router for the pages
 const router = createBrowserRouter([
@@ -55,11 +56,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/account",
-    element: (
-      <AuthContextProvider>
-        <AccountLayout />
-      </AuthContextProvider>
-    ),
+    element: <AccountLayout />,
     children: [
       {
         index: true,
@@ -69,14 +66,20 @@ const router = createBrowserRouter([
         path: "/account/dashboard",
         element: <Dashboard />,
       },
+      {
+        path: "/account/election-space",
+        element: <ElectionSpace />,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ThemeContextProvider>
-      <RouterProvider router={router} />
-    </ThemeContextProvider>
+    <AuthContextProvider>
+      <ThemeContextProvider>
+        <RouterProvider router={router} />
+      </ThemeContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );

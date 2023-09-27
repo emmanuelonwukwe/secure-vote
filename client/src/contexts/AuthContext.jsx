@@ -1,15 +1,13 @@
 /* eslint-disable react/prop-types */
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import axiosRequest from "../requests/axios-request";
 export const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
-  const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState({});
 
-  useEffect(() => {
     // This verifies the token on the localstorage
-    const verifyToken = async () => {
+    const fetchTokenUser = async () => {
       // Check if the theme is not set
       if (!localStorage.getItem("jwt_token")) {
         logout();
@@ -23,38 +21,38 @@ export function AuthContextProvider({ children }) {
           //const currentTimeInSeconds = Math.floor(Date.now() / 1000);
           // const diff = expirySec - currentTimeInSeconds;
 
-          
-            startSessionTimer();
-            setIsAuth(true);
-            setUser(user);
-          
-          window.addEventListener("focus", startSessionTimer);
+          if (Object.keys(user).length < 1) {
+            throw new Error("Invalid token data")
+          }
+
+          login(user);
+          return user;
         } catch (error) {
-          console.log("Unable to verify token");
+          throw new Error("Unable to verify token");
         }
       }
     };
 
-    verifyToken();
-  }, []);
+    // This function logs the user in as the authenticated user
+    const login = (userData) => {
+      setUser(userData);
+    }
+
 
   // Add event listener for logout functionality
   const logout = () => {
     localStorage.removeItem("jwt_token");
-    setIsAuth(false);
     setUser({});
   };
 
-  // Implement session timeout
-  const startSessionTimer = () => {
-    setTimeout(() => {
-      logout();
-    }, 60000);
-  };
-
   return (
-    <AuthContext.Provider value={{ isAuth, logout, user }}>
+    <AuthContext.Provider value={{ user, login, logout, fetchTokenUser }}>
       {children}
     </AuthContext.Provider>
   );
+}
+
+// This hook returns the returned values from context api for the auth contenxt
+export function useAuth(){
+  return useContext(AuthContext);
 }

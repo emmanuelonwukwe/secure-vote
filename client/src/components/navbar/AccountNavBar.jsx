@@ -1,11 +1,19 @@
 /* eslint-disable no-unused-vars */
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useDrawerHelper from "../../hooks/useDrawerhelper";
 import SigninIcon from "../icons/SigninIcon";
 import AccountMobileDrawer from "./drawers/AccountMobileDrawer";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function AccountNavbar() {
   const { openDrawer } = useDrawerHelper();
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  }
 
   return (
     <>
@@ -62,7 +70,7 @@ export default function AccountNavbar() {
                 </ul>
                 <div className="md:flex items-center hidden space-x-4 ml-8 lg:ml-12">
                   <h1 className="text-gray-400 font-bold bg-red-300 pt-1 md:text-sm hover:cursor-pointer px-2 rounded hover:bg-softgreen">
-                    <NavLink to="/register"className={({ isActive, isPending }) =>
+                    <NavLink onClick={handleLogout} to="/login"className={({ isActive, isPending }) =>
                       isActive ? "text-green-600" : "inline-flex"
                     }><SigninIcon />&nbsp;Logout</NavLink>
                   </h1>

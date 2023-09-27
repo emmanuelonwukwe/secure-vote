@@ -44,4 +44,38 @@
     .loading{
         @apply z-[99999999] bg-black
     }
+    .account-card{
+        @apply max-w-sm min-w-[260px] p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700
+    }
+    .account-card-title{
+        @apply mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white
+    }
+    .account-card-sub-title{
+        @apply mb-3 font-normal text-gray-500 dark:text-gray-400
+    }
+    .account-card-link{
+        @apply inline-flex items-center text-blue-600 hover:underline
+    }
+}
+
+::-webkit-scrollbar{
+    background-color: skyblue;
+    width: 10px;
+}
+
+::-webkit-scrollbar-button{
+    border-radius: 3px;
+    background-color: black;
+}
+
+::-webkit-scrollbar-corner{
+    background-color: green;
+}
+
+::-webkit-scrollbar-track{
+    background-color: blue;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #060640;
+    max-height: 20px;
 }

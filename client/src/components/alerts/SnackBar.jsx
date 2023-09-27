@@ -31,7 +31,7 @@ export default function SnackBar({ message, type }) {
   return alertBox && type && message ? (
     <div id="snackbar"
     onClick={closeSnackBar}
-    className="fixed z-50 bottom-0 right-0 w-full flex justify-center items-center bg-black pt-5">
+    className="fixed z-50 bottom-0 right-0 w-full flex justify-center items-center bg-primary pt-5">
       {alertBox}
     </div>
   ) : (
