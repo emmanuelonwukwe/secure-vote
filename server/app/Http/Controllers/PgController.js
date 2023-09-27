@@ -10,9 +10,15 @@ class PgController extends Controller {
     this.res = res;
   }
 
+  // This migrates the database tables
   async createDatabaseTables() {
     await migrateUp();
     //migrateDown()
+  }
+
+  // This drops the database tables
+  dropDatabaseTables() {
+    migrateDown()
   }
 
 // This helps to get the postgress database version

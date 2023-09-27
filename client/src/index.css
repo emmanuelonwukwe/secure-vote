@@ -56,6 +56,26 @@
     .account-card-link{
         @apply inline-flex items-center text-blue-600 hover:underline
     }
+
+    table.transactions-table tbody tr td{
+        @apply p-3;
+    }
+
+    .btn {
+        @apply flex gap-1 p-2 text-white font-bold text-sm rounded-lg
+    }
+
+    .btn-danger{
+        @apply bg-red-600
+    }
+
+    .btn-primary{
+        @apply bg-primary
+    }
+
+    .btn-warning {
+        @apply bg-orange-500
+    }
 }
 
 ::-webkit-scrollbar{
