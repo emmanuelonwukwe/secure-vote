@@ -58,20 +58,19 @@
 
 This project aims to produce a highly performant and mobile responsive electoral voting web application (known as **Secure Vote &trade;** ) that allows voters to vote in a free, fair and credible manner.
 
-Its frontend is written in React which is well known JavaScript library for building fast applications and its backend will be written in ExpressJS, which is a popular Node.js framework for writing server-side applications; which handle provide API endpoints operations such as routing.
+Its frontend is written in React which is well known JavaScript library for building fast applications and its backend will be written in ExpressJS, which is a popular Node.js framework for writing server-side applications; which provides API endpoints operations such as routing.
 
 ## Built With
 
 - [![React][React.js]][React-url]
 - [![Vite][Vite]][Vite-url]
-- [![TypeScript][TypeScript]][TypeScript-url]
 - [![TailwindCSS][TailwindCss]][TailwindCSS-url]
 
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
-To get a local copy up and running follow these simple example steps.
+To get it into your local system, follow these simple example steps.
 
 ### Prerequisites
 
