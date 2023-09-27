@@ -14,7 +14,12 @@ export function AuthContextProvider({ children }) {
         throw new Error("Token not set on the user device");
       } else {
         try {
-          const response = await axiosRequest.get("/verify-token");
+          const token = localStorage.getItem("jwt_token");
+          const response = await axiosRequest.get("/verify-token", {
+            headers: {
+              "token": token
+            }
+          });
 
           const payload = response.data.payload;
           const user = payload.data;
@@ -22,9 +27,11 @@ export function AuthContextProvider({ children }) {
           //const currentTimeInSeconds = Math.floor(Date.now() / 1000);
           // const diff = expirySec - currentTimeInSeconds;
 
-          if (user && Object.keys(user).length > 0) {
-            login(user);
+          if (!user || Object.keys(user).length < 1) {
+            throw new Error("Invalid token payload");
           }
+
+          login(user);
         } catch (error) {
           throw new Error("Unable to verify token");
         }

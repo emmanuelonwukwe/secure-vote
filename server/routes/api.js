@@ -80,6 +80,19 @@ router.get("/create-db-tables", AdminOnlyMiddleware.handle, async (req, res) => 
     }
 });
 
+// This helps the admin to migrate the db tables
+router.get("/drop-db-tables", AdminOnlyMiddleware.handle, async (req, res) => {
+    try {
+        const pgController = new PgController(req, res);
+        pgController.dropDatabaseTables();
+        res.json({
+            message: "Database tables dropped successfully"
+        });
+    } catch (error) {
+        handleCaughtErrorRes(error, res)
+    }
+});
+
 
 // This is an unknown route
 router.get("*", (req, res) => {

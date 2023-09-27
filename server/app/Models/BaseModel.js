@@ -25,7 +25,7 @@ class BaseModel {
         // Check if the data keys exists in the global db tables array of this model
         Object.entries(data).forEach(([key, val]) => {
             if (!DBTables[this.table].includes(key)) {
-                throw new ApiException(`Your data key '${key}' is not registered in the ${sql(this.table)} table of global database DBTables`);
+                throw new ApiException(`Your data key '${key}' is not registered in the ${this.table} table of global database DBTables`);
             }
         });
 
@@ -162,7 +162,7 @@ class BaseModel {
 
         // Check if it is an invalid table
         if (!DBTables.hasOwnProperty(this.table)) {
-            throw new ApiException(`The ${this.constructor.name} model table '${sql(this.table)}' is not registered in the global DBTables of your database`);
+            throw new ApiException(`The ${this.constructor.name} model table '${this.table}' is not registered in the global DBTables of your database`);
         }
 
         return true;

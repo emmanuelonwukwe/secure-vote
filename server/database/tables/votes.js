@@ -9,8 +9,8 @@ async function votesCreateTableQry(sql) {
         election_id VARCHAR(255) NOT NULL,
         date_created TIMESTAMP DEFAULT NOW(),
         time_created integer DEFAULT CAST(EXTRACT(epoch FROM NOW()) AS INT),
-        CONSTRAINT fk_user FOREIGN KEY(voter_id) REFERENCES users(id),
-        CONSTRAINT fk_election FOREIGN KEY(election_id) REFERENCES elections (id)
+        CONSTRAINT fk_user FOREIGN KEY(voter_id) REFERENCES users(id) ON DELETE CASCADE,
+        CONSTRAINT fk_election FOREIGN KEY(election_id) REFERENCES elections (id) ON DELETE CASCADE
     )`;
 }
 

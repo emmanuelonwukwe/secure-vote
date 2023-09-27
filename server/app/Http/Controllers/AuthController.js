@@ -1,10 +1,14 @@
 
+import ApiException from "../../Exceptions/ApiException.js";
 import Controller from "./Controller.js";
 import TokenController from "./TokenController.js";
 
-class UserController extends Controller {
+class AuthController extends Controller {
   constructor(token) {
     super();
+    if (!token) {
+      throw new ApiException("Header token not set to handle request")
+    }
     this.token = token;
   }
 
@@ -34,4 +38,4 @@ class UserController extends Controller {
   }
 }
 
-export default UserController;
+export default AuthController;
