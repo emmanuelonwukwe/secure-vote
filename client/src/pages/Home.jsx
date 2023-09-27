@@ -157,8 +157,23 @@ function Home() {
         <div className="faq-cards-container">
           <div className="faq-card">
             <img src="/images/group-20.svg" className="faq-card-img" />
-            <h1 className="faq-card-title">Create the Ballot</h1>
+            <h1 className="faq-card-title">Create an Account</h1>
             <p className="faq-card-body">
+              Register and login into your Secure vote account
+            </p>
+          </div>
+          <div className="faq-card">
+            <img src="/images/group-20.svg" className="faq-card-img" />
+            <h1 className="faq-card-title">Participate in Elections</h1>
+            <p className="faq-card-body">
+              After registratio, the user can participate in open elections available or closed elections that they are invited into.
+            </p>
+          </div>
+          <div className="faq-card">
+            <img src="/images/group-20.svg" className="faq-card-img" />
+            <h1 className="faq-card-title">Create an Election space</h1>
+            <p className="faq-card-body">
+              A registered election manager can create a ballot for people to participate
               Add questions (i.e. positions) to your ballot and add options
               (candidates, measures, write-in fields, etc.) to your questions.
               Add a photo and/or short bio
