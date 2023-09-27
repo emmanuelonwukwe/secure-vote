@@ -63,7 +63,7 @@ class LoginController extends Controller {
       secretKey
     );
 
-    return token;
+    return { token, user: authUser };
   }
 }
 

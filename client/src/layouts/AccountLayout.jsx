@@ -16,19 +16,12 @@ export default function AccountLayout() {
 
     // This function fetches and set the user with the token
     const fetchAndSetUser = async () => {
-        try {
-            const user = await fetchTokenUser();
-
-            if (!user || Object.keys(user).length < 1) {
-                throw  new Error("Not authenticated");
-            }
-            
-        } catch (error) {
-            setIsAuth(false);
-            logout();
-        }
-     
-
+      try {
+        await fetchTokenUser();
+      } catch (error) {
+        setIsAuth(false);
+        logout();
+      }
     };
 
     fetchAndSetUser();

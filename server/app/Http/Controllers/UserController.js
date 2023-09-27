@@ -3,13 +3,13 @@ import Controller from "./Controller.js";
 import TokenController from "./TokenController.js";
 
 class UserController extends Controller {
-  constructor(token){
+  constructor(token) {
     super();
     this.token = token;
   }
 
   /**
-   * This function gets the user with the token
+   * This function gets the user who has the token
    * @param {object} data - The object of the election
    * @returns {object}
    */
@@ -20,11 +20,18 @@ class UserController extends Controller {
   }
 
   /**
+   * This function gets the user Id who has the token
+   */
+  getId() {
+    return this.getUser().id;
+  }
+
+  /**
    * This returns the user role
    */
-  getRole(){
-
+  getRole() {
+    return this.getUser().role;
   }
 }
 
-export default ElectionController;
+export default UserController;

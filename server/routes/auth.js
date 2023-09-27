@@ -10,11 +10,12 @@ router.post("/signup", async (req, res) => {
   try {
     const userData = req.body;
 
-    const token = await RegisterController.signup(userData);
+    const { token, user } = await RegisterController.signup(userData);
 
     res.status(200).json({
       message: "Successfully registered",
-      token: token,
+      token,
+      user
     });
   } catch (error) {
     handleCaughtErrorRes(error, res);
@@ -26,11 +27,12 @@ router.post("/login", async (req, res) => {
   try {
     const userData = req.body;
 
-    const token = await LoginController.authenticate(userData);
+    const { token, user } = await LoginController.authenticate(userData);
 
     res.status(200).json({
       message: "Successfully logged in",
-      token: token,
+      token,
+      user
     });
   } catch (error) {
     handleCaughtErrorRes(error, res);

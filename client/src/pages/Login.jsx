@@ -11,7 +11,7 @@ export default function Login() {
   const { message, setMessage, openSnackBar, type, setType } = useMessage();
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
-  const { fetchTokenUser } = useAuth();
+  const { login } = useAuth();
 
   // This adds updates the formData to add the input field
   const handleInputChange = (event) => {
@@ -31,8 +31,8 @@ export default function Login() {
       // Save the token to the user localStorage
       localStorage.setItem("jwt_token", response.data.token);
 
-      // Fetch the token user and log him in
-      await fetchTokenUser()
+      // Login the authenticated user
+      login(response.data.user);
 
       setIsProcessing(false);
 
