@@ -4,7 +4,7 @@
 
 @layer base {
     #root{
-        @apply bg-aliceblue-100 md:pt-7
+        @apply bg-aliceblue-100 dark:bg-black md:pt-1 overflow-x-hidden
     }
     .outlet-area{
         @apply w-full mx-auto
@@ -31,4 +31,71 @@
     .faq-card-body{
         @apply text-gray-200
     }
+    .page-title{
+        @apply text-center font-sans font-bold text-2xl bg-gray-100 max-w-[200px] mx-auto p-2 rounded-2xl
+    }
+    .page-title-first{
+        @apply text-softgreen
+    }
+    .drawer-link{
+        @apply flex items-center p-2 text-gray-900 rounded-lg dark:text-white
+         hover:bg-gray-100 dark:hover:bg-gray-700
+    }
+    .loading{
+        @apply z-[99999999] bg-black
+    }
+    .account-card{
+        @apply max-w-sm min-w-[260px] p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700
+    }
+    .account-card-title{
+        @apply mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white
+    }
+    .account-card-sub-title{
+        @apply mb-3 font-normal text-gray-500 dark:text-gray-400
+    }
+    .account-card-link{
+        @apply inline-flex items-center text-blue-600 hover:underline
+    }
+
+    table.transactions-table tbody tr td{
+        @apply p-3;
+    }
+
+    .btn {
+        @apply flex gap-1 p-2 text-white font-bold text-sm rounded-lg
+    }
+
+    .btn-danger{
+        @apply bg-red-600
+    }
+
+    .btn-primary{
+        @apply bg-primary
+    }
+
+    .btn-warning {
+        @apply bg-orange-500
+    }
+}
+
+::-webkit-scrollbar{
+    background-color: skyblue;
+    width: 10px;
+}
+
+::-webkit-scrollbar-button{
+    border-radius: 3px;
+    background-color: black;
+}
+
+::-webkit-scrollbar-corner{
+    background-color: green;
+}
+
+::-webkit-scrollbar-track{
+    background-color: blue;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #060640;
+    max-height: 20px;
 }

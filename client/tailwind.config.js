@@ -3,7 +3,9 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -18,9 +20,12 @@ export default {
         },
         "off-white": "#FAFAFB",
         "dark-blue": "#060640",
+        "goldenred": "#FEC536"
       }
     },
   },
-  plugins: [],
+  plugins: [
+    import('flowbite/plugin')
+  ],
 }
 

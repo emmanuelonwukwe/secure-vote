@@ -20,8 +20,8 @@ export default function MainFooter() {
               </div>
               <div className="flex flex-col mx-auto mt-6 space-y-3 md:space-y-0">
                 <p className="text-white text-sm">
-                  This is a big one and i consider it one of the most <br />
-                  important things for a business.
+                  This is a big one and we consider it one of the most <br />
+                important electronic app.
                 </p>
                 <div className="pt-5">
                   <img  src="/images/fb-icon.svg"/>
@@ -34,7 +34,7 @@ export default function MainFooter() {
               </p>
               <div className="flex flex-col items-start mt-5 space-y-2">
                 <p className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">
-                  <Link to="/home">Home</Link>
+                  <Link to="/">Home</Link>
                 </p>
                 <p className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">
                   <Link to="/about">About</Link>
@@ -50,10 +50,10 @@ export default function MainFooter() {
               </p>
               <div className="flex flex-col items-start mt-5 space-y-2">
                 <p className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">
-                  <Link to="/home">About</Link>
+                  <Link to="/about">About</Link>
                 </p>
                 <p className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">
-                  <Link to="/home">Contact</Link>
+                  <Link to="/contact">Contact</Link>
                 </p>
               </div>
             </div>
@@ -63,13 +63,13 @@ export default function MainFooter() {
               </p>
               <div className="flex flex-col items-start mt-5 space-y-2">
                 <p className="capitalize text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">
-                  <Link to="/home">Privacy Policy</Link>
+                  <Link to="/">Privacy Policy</Link>
                 </p>
                 <p className="capitalize text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">
-                  <Link to="/home">Terms & condition</Link>
+                  <Link to="/">Terms & condition</Link>
                 </p>
                 <p className="capitalize text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500">
-                  <Link to="/home">FAQ</Link>
+                  <Link to="/about">FAQ</Link>
                 </p>
               </div>
             </div>

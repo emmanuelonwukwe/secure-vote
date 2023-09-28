@@ -1,30 +1,26 @@
 import BaseMiddleware from "./BaseMiddleware.js";
 import ApiException from "../../Exceptions/ApiException.js";
+import AuthController from "../Controllers/AuthController.js";
 
 /**
- * The global app middlewares are registered here
+ * The middleware only for admin role
  */
 class AdminOnlyMiddleware extends BaseMiddleware {
-    role = this.getRole();
+  // Assign this as a callback to the route that needs this middleware
+  static handle(req, res, next) {
+    //const $this = new AdminOnlyMiddleware();
 
-    constructor() {
-        super();
+    // The authenticated user
+    //const authController = new AuthController(req.headers.token);
+
+    const authUserRole = 'admin';//authController.getRole();
+
+    if ( authUserRole !== "admin") {
+      throw new ApiException("You are not permitted to access this by admin");
     }
 
-    getRole() {
-        return "user";
-    }
-
-    // Assign this as a callback to the route that needs this middleware
-    static handle(req, res, next) {
-        const $this = new AdminOnlyMiddleware();
-
-        if ($this.role !== "admin") {
-            throw new ApiException("You are not permitted to access this by admin");
-        }
-
-        next();
-    }
+    next();
+  }
 }
 
 export default AdminOnlyMiddleware;

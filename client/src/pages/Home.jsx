@@ -39,6 +39,30 @@ function Home() {
                   another, this country, and this world
                 </blockquote>
               </div>
+              <p className="mt-4 capitalize font-semibold text-gray-500 tracking-wider leading-7">
+                Discover leaders that align with your core values. Making it
+                easier to vote with confidence for the people and issues that
+                matter to you
+              </p>
+              <div className="mt-8">
+                <Link
+                  to="/register"
+                  className="inline-block text-sm capitalize text-white bg-primary py-4 px-4 rounded font-semibold hover:bg-softgreen"
+                >
+                  get started
+                </Link>
+                <img
+                  src="/images/video.svg"
+                  className="inline-block mt-5 ml-5"
+                />
+              </div>
+              <div className="p-3 hidden md:block bg-white rounded-lg w-[80%]">
+                <img src="/images/straightquotes-1.svg" />
+                <blockquote className="text-gray-200 text-sm mt-3">
+                  Voting is the expression of our commitment to ourselves, one
+                  another, this country, and this world
+                </blockquote>
+              </div>
             </div>
           </div>
           <div className="h-96 col-span-7 relative mt-[30px] sm:mt-5">
@@ -133,8 +157,23 @@ function Home() {
         <div className="faq-cards-container">
           <div className="faq-card">
             <img src="/images/group-20.svg" className="faq-card-img" />
-            <h1 className="faq-card-title">Create the Ballot</h1>
+            <h1 className="faq-card-title">Create an Account</h1>
             <p className="faq-card-body">
+              Register and login into your Secure vote account
+            </p>
+          </div>
+          <div className="faq-card">
+            <img src="/images/group-20.svg" className="faq-card-img" />
+            <h1 className="faq-card-title">Participate in Elections</h1>
+            <p className="faq-card-body">
+              After registratio, the user can participate in open elections available or closed elections that they are invited into.
+            </p>
+          </div>
+          <div className="faq-card">
+            <img src="/images/group-20.svg" className="faq-card-img" />
+            <h1 className="faq-card-title">Create an Election space</h1>
+            <p className="faq-card-body">
+              A registered election manager can create a ballot for people to participate
               Add questions (i.e. positions) to your ballot and add options
               (candidates, measures, write-in fields, etc.) to your questions.
               Add a photo and/or short bio
