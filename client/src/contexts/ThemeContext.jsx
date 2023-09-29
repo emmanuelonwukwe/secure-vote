@@ -11,7 +11,7 @@ export function ThemeContextProvider({ children }){
       if (!localStorage.getItem("theme")) {
         localStorage.setItem("theme", "light");
       } else{
-        toggleDarkMode();
+        getCurrentMode();
       }
   
       darkClassToggle();
@@ -27,6 +27,7 @@ export function ThemeContextProvider({ children }){
       }
     };
   
+    // This toggles the mode of the thems
     const toggleDarkMode = () => {
       if (localStorage.getItem("theme") === "dark") {
         localStorage.setItem("theme", "light");
@@ -38,6 +39,17 @@ export function ThemeContextProvider({ children }){
   
       darkClassToggle();
     };
+
+    // This gets the current mode of the theme
+    const getCurrentMode = () => {
+      if (localStorage.getItem("theme") === "dark") {
+        setDarkMode(true);
+      } else {
+        setDarkMode(false);
+      }
+
+      darkClassToggle();
+    }
 
     return(
         <ThemeContext.Provider value={{darkMode, toggleDarkMode}}>
