@@ -5,18 +5,22 @@ import TokenController from "../Controllers/TokenController.js";
 class MustVerifyTokenMiddleware extends BaseMiddleware {
     // Assign this as a callback to the route that needs this middleware
     static handle(req, res, next) {
-        const $this = new MustVerifyTokenMiddleware();
+        try {
+            const $this = new MustVerifyTokenMiddleware();
 
-        // Get the token in the request
-        const token = req.headers.token;
+            // Get the token in the request
+            const token = req.headers.token;
 
-        const payload = TokenController.verifyToken(token);
+            const payload = TokenController.verifyToken(token);
 
-        if (Object.keys(payload).length < 1) {
-            throw new ApiException("Invalid or expired token sent");
+            if (Object.keys(payload).length < 1) {
+                throw new ApiException("Invalid or expired token sent");
+            }
+
+            next();
+        } catch (error) {
+            next(error);
         }
-
-        next();
     }
 }
 

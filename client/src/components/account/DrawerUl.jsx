@@ -4,7 +4,7 @@ import InboxIcon from "../icons/InboxIcon";
 import MoonIcon from "../icons/MoonIcon";
 import DashboardIcon from "../icons/DashboardIcon";
 import { useContext } from "react";
-import { ThemeContext } from "../../contexts/themeContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import { useAuth } from "../../contexts/AuthContext";
 import ChatBarIcon from "../icons/ChatBarIcon";
 import CheckBadgeIcon from "../icons/CheckBadgeIcon";

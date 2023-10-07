@@ -7,7 +7,7 @@ import SigninIcon from "../../icons/SigninIcon";
 import SignupIcon from "../../icons/SignupIcon";
 import RocketLaunchIcon from "../../icons/RocketLaunchIcon";
 import ChatBubbleIcon from "../../icons/ChatBubbleIcon";
-import useDrawerHelper from "../../../hooks/useDrawerhelper";
+import useDrawerHelper from "../../../hooks/useDrawerHelper";
 
 export default function MainMobileDrawer() {
   const { closeDrawer } = useDrawerHelper();

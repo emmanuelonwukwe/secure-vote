@@ -13,7 +13,7 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Dashboard from "./pages/account/Dashboard";
 import AccountLayout from "./layouts/AccountLayout";
-import { ThemeContextProvider } from "./contexts/themeContext";
+import { ThemeContextProvider  } from "./contexts/ThemeContext";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import ElectionSpace from "./pages/account/ElectionSpace";
 
