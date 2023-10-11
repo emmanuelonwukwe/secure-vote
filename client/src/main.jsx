@@ -16,6 +16,7 @@ import AccountLayout from "./layouts/AccountLayout";
 import { ThemeContextProvider  } from "./contexts/ThemeContext";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import ElectionSpace from "./pages/account/ElectionSpace";
+import Practice from "./pages/Practice";
 
 // Create the router for the pages
 const router = createBrowserRouter([
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      {
+        path: "/practice",
+        element: <Practice />
+      }
     ],
   },
   {
