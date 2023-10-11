@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vitejs/plugin-react": "^4.0.3",
     "axios": "^1.5.0",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.6.0",
