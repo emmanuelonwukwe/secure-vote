@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Link, NavLink } from "react-router-dom";
 import MainMobileDrawer from "./drawers/MainMobileDrawer";
-import useDrawerHelper from "../../hooks/useDrawerhelper";
+import useDrawerHelper from "../../hooks/useDrawerHelper";
 
 export default function MainNavbar() {
   const { openDrawer } = useDrawerHelper();

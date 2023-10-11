@@ -18,8 +18,13 @@ class BaseMiddleware {
     * 
     */
     static handle(req, res, next) {
+        try {
         // code
         next()
+        } catch (error) {
+            // Redirect execution to the middlware error handler by calling next with arg passed
+            next(error);
+        }
     }
 }
 

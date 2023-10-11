@@ -11,7 +11,7 @@ function handleCaughtErrorRes(error, res) {
         message: error.message,
         errorName: error.name,
         erroCode: error.code,
-        stackTrace: process.env.APP_ENVIRONMENT == 'development' ? error?.stack : 'No trace as app env is not in `development` mode'
+        stackTrace: process.env.NODE_ENV == 'development' ? error?.stack : 'No trace as app env is not in `development` mode'
     });
 }
 

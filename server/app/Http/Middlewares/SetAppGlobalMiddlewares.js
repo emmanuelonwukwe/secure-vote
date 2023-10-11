@@ -20,7 +20,7 @@ class SetAppGlobalMiddlewares extends BaseMiddleware{
         app.use(xss());
 
         // Brute force attack handler to limit requests per i.p
-        const allowlist = ['::11', '192.168.0.21'];
+        const allowlist = ['::1', '192.168.0.21'];
 
         // The limiter settings
         const limiter = rateLimit({
@@ -39,6 +39,9 @@ class SetAppGlobalMiddlewares extends BaseMiddleware{
         // Set the cross origin policy
         app.use(cors({ origin: [...allowedOrigins] }));
         //app.use(AdminOnlyMiddleware.handle)
+
+        // Add static file
+        app.use(this.express.static("dist"));
     }
 
     // The message that fires when an Ip access is limited by too may requests

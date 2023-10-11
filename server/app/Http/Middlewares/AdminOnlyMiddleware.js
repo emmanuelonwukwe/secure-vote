@@ -8,18 +8,22 @@ import AuthController from "../Controllers/AuthController.js";
 class AdminOnlyMiddleware extends BaseMiddleware {
   // Assign this as a callback to the route that needs this middleware
   static handle(req, res, next) {
-    //const $this = new AdminOnlyMiddleware();
+    try {
+      //const $this = new AdminOnlyMiddleware();
 
-    // The authenticated user
-    //const authController = new AuthController(req.headers.token);
+      // The authenticated user
+      //const authController = new AuthController(req.headers.token);
 
-    const authUserRole = 'admin';//authController.getRole();
+      const authUserRole = 'admin';//authController.getRole();
 
-    if ( authUserRole !== "admin") {
-      throw new ApiException("You are not permitted to access this by admin");
+      if (authUserRole !== "admin") {
+        throw new ApiException("You are not permitted to access this by admin");
+      }
+
+      next();
+    } catch (error) {
+      next(error);
     }
-
-    next();
   }
 }
 
