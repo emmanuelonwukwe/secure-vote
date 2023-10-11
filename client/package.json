@@ -8,7 +8,7 @@
     "build": "vite build && npm run copy:ui:build:to:server",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "copy:ui:build:to:server":"rm -rf ../server/dist && cp -r ./dist ../server"
+    "copy:ui:build:to:server": "rm -rf ../server/dist && cp -r ./dist ../server"
   },
   "dependencies": {
     "axios": "^1.5.0",
