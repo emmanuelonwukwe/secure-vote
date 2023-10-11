@@ -100,12 +100,12 @@ router.get("/drop-db-tables", AdminOnlyMiddleware.handle, async (req, res) => {
 //     if (!req.file) { }
 // });
 
-
 // This is an unknown route
 router.get("*", (req, res) => {
     res.json({
         message: "Unknown route"
     });
 });
+
 
 export default router;
