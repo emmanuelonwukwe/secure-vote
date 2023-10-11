@@ -59,7 +59,7 @@ export default function Login() {
     <>
       <section className="overflow-hidden p-5 mb-12">
         <h1 className="page-title">
-          <span className="page-title-first">Log</span> In
+          <span className="page-title-first">Log</span> Ino
         </h1>
         {isProcessing && <ProgressIndicator />}
         <SnackBar message={message} type={type} />
