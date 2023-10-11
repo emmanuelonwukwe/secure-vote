@@ -1,4 +1,4 @@
-name: This CI/CD workflow file helps to auto merge every pool request to the master branch
+name: This CI/CD workflow file helps to auto merge every pull request to the master branch
 
 on:
   pull_request:
@@ -19,7 +19,7 @@ jobs:
         run: |
           # Ensure the pull request is up to date with the base branch (main)
           git fetch origin master:master
-          # Merge the pull request into main
+          # Merge the pull request into master
           git checkout master
           git merge --no-ff ${{ github.event.pull_request.head.sha }}
           git push origin master
