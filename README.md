@@ -4,6 +4,7 @@
 [![Issues][issues-shield]][issues-url]
 
 <!-- PROJECT LOGO -->
+
 <br />
 <div align="center"> 
   <img src="./client/public/banner-and-logo.png" alt="Logo">
