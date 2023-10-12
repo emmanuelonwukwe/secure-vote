@@ -4,6 +4,7 @@
 [![Issues][issues-shield]][issues-url]
 
 <!-- PROJECT LOGO -->
+
 <br />
 <div align="center"> 
   <img src="./client/public/banner-and-logo.png" alt="Logo">
@@ -37,7 +38,7 @@
 
 ## Introduction
 
-SecureVote is a secure and user-friendly application designed to facilitate electronic voting processes in various contexts, such as elections, surveys, and decision-making within organizations. This app ensures transparency, security, and ease of use, making it an ideal solution for modernizing the voting experience.
+Securevote is a secure and user-friendly application designed to facilitate electronic voting processes in various contexts, such as elections, surveys, and decision-making within organizations. This app ensures transparency, security, and ease of use, making it an ideal solution for modernizing the voting experience. The app link is [secure-vote.onrender.com](secure-vote.onrender.com)
 
 Key advantages of the Electronic Voting App include:
 

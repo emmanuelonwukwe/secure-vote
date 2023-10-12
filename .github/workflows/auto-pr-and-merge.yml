@@ -1,0 +1,32 @@
+name: Auto Pull Request and Merge
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  create_and_merge_pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Create Pull Request
+        id: create_pr
+        uses: softprops/action-gh-release@v1
+        with:
+          files: /src
+          draft: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge Pull Request
+        if: steps.create_pr.outputs.html_url
+        run: |
+          pr_url="${{ steps.create_pr.outputs.html_url }}"
+          pr_number=$(basename $pr_url)
+          echo "Merging Pull Request $pr_number"
+          gh pr merge $pr_number --merge
+          
