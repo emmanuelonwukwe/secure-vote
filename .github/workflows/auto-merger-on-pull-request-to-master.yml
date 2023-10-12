@@ -10,15 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout the branch
         uses: actions/checkout@v2
 
       - name: Merge Pull Request
         env:
-          GITHUB_TOKEN: ${{ secrets.CI_MERGER_PAT }}
+          GITHUB_TOKEN: ${{ secrets.CI_TOKEN }}
         run: |
           # Ensure the pull request is up to date with the base branch (main)
-          git fetch origin master:master
+          git fetch origin master
           # Merge the pull request into master
           git checkout master
           git merge --no-ff ${{ github.event.pull_request.head.sha }}
