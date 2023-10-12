@@ -3,7 +3,8 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 
-<!-- PROJECT LOGO OF SECUREVOTE -->
+<!-- PROJECT LOGO -->
+
 <br />
 <div align="center"> 
   <img src="./client/public/banner-and-logo.png" alt="Logo">
