@@ -15,8 +15,6 @@ jobs:
 
     - name: Merge pull request
       run: |
-        # Fetch the latest changes from the default remote repository
-        git fetch origin
         # Merge the pull request branch
         git merge ${{ github.event.pull_request.head.sha }}
         # Push the changes back to the remote repository
