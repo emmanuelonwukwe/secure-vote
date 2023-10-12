@@ -18,7 +18,7 @@ jobs:
         # Fetch the latest changes from the default remote repository
         git fetch origin
         # Merge the pull request branch
-        git merge --no-ff ${{ github.event.pull_request.head.sha }}
+        git merge ${{ github.event.pull_request.head.sha }}
         # Push the changes back to the remote repository
         git push origin master
       env:
