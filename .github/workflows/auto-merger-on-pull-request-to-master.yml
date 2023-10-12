@@ -6,20 +6,14 @@ on:
 
 jobs:
   merge:
-    name: Merge on Success
+    name: Merging job run on ubuntu machine
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
       - name: Merge Pull Request
-        env:
-          GITHUB_TOKEN: ${{ secrets.CI_MERGER_PAT }}
-        run: |
-          # Ensure the pull request is up to date with the base branch (main)
-          git fetch origin master:master
-          # Merge the pull request into master
-          git checkout master
-          git merge --no-ff ${{ github.event.pull_request.head.sha }}
-          git push origin master
+        uses: juliangruber/merge-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.CI_TOKEN }}
+          number: 1
+          method: squash # merge rebase
+          repo: juliangruber/octokit-action
