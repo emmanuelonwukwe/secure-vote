@@ -1,19 +1,17 @@
-name: This CI/CD workflow file helps to auto merge every pull request to the master branch
-
+name: Merge any release branch to uat
 on:
   pull_request:
-    branches: ["master"]
-
+    branches:
+      - 'master'
 jobs:
-  merge:
-    name: Merging job run on ubuntu machine
+  merge-branch:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Merge Pull Request
-        uses: juliangruber/merge-pull-request-action@v1
+      - uses: actions/checkout@master
+
+      - name: Merge staging -> uat
+        uses: devmasx/merge-branch@master
         with:
-          github-token: ${{ secrets.CI_TOKEN }}
-          number: 1
-          method: squash # merge rebase
-          repo: juliangruber/octokit-action
+          type: now
+          target_branch: uat
+          github_token: ${{ secrets.CI_TOKEN }}
