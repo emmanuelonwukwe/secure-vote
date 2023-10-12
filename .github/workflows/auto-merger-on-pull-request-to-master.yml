@@ -15,8 +15,6 @@ jobs:
 
     - name: Merge pull request
       run: |
-        # Ensure we're on the master branch
-        git checkout master
         # Fetch the latest changes from the default remote repository
         git fetch origin
         # Merge the pull request branch
