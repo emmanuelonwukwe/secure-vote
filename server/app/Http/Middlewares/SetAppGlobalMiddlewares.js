@@ -42,6 +42,7 @@ class SetAppGlobalMiddlewares extends BaseMiddleware{
 
         // Add static file
         app.use(this.express.static("dist"));
+        app.use("/uploads", this.express.static("uploads"));
     }
 
     // The message that fires when an Ip access is limited by too may requests

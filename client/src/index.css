@@ -10,7 +10,7 @@
         @apply w-full mx-auto
     }
     .nav-bar-link{
-        @apply  text-gray-700 hover:text-indigo-600 text-sm
+        @apply  text-gray-300 hover:text-indigo-600 text-sm
     }
     .rounded-img-sm{
         @apply inline-block w-10 h-10 rounded-full

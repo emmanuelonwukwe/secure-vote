@@ -93,13 +93,6 @@ router.get("/drop-db-tables", AdminOnlyMiddleware.handle, async (req, res) => {
     }
 });
 
-// This route helps to upload file to the db
-
-// This handle file upload POST request to the server
-// router.post('/upload', upload.single('file'), (req, res) => {
-//     if (!req.file) { }
-// });
-
 // This is an unknown route
 router.get("*", (req, res) => {
     res.json({
