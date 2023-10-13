@@ -67,9 +67,9 @@ export default function MainNavbar() {
                   </li>
                 </ul>
                 <div className="md:flex items-center hidden space-x-4 ml-8 lg:ml-12">
-                  <h1 className="text-gray-600 md:text-sm font-bold py-2 hover:cursor-pointer hover:text-indigo-600">
+                  <h1 className="md:text-sm font-bold py-2 hover:cursor-pointer hover:text-indigo-600">
                     <NavLink to="/login" className={({ isActive, isPending }) =>
-                      isActive ? "text-green-600" : ""
+                      isActive ? "text-green-600" : "nav-bar-link"
                     }>Sign In</NavLink>
                   </h1>
                   <h1 className="text-primary bg-white py-1 md:text-sm hover:cursor-pointer px-4 rounded hover:bg-softgreen">

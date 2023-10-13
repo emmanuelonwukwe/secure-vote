@@ -7,7 +7,7 @@ class AuthController extends Controller {
   constructor(token) {
     super();
     if (!token) {
-      throw new ApiException("Header token not set to handle request")
+      throw new ApiException("Header `token` not set to handle request")
     }
     this.token = token;
   }

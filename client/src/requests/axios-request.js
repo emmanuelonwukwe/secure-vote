@@ -1,14 +1,11 @@
 import axios from "axios";
-const app_environment = "production";
-const baseURL =
-  app_environment == "development"
-    ? "http://localhost:5173/api/v1"
-    : "https://secure-vote.onrender.com/api/v1";
+import { BACKEND_SITE, BACKEND_API_BASE_URL } from "../config/app.js";
+
 
 const axiosRequest = axios.create({
-  baseURL: baseURL,
+  baseURL: BACKEND_SITE + BACKEND_API_BASE_URL,
   timeout: 60000,
-  headers: { "static-header": "Pass Static data" },
+  headers: { "static-header": "Pass Static data only else dynamic data will break" },
 });
 
 export default axiosRequest;

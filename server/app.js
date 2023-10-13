@@ -4,6 +4,7 @@ import handleCaughtErrorRes from "./helpers/caught-error-handler.js";
 import electionRouter from './routes/election.js'
 import apiRouter from "./routes/api.js";
 import authRouter from "./routes/auth.js";
+import userRouter from "./routes/user.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -17,8 +18,9 @@ new SetAppGlobalMiddlewares(app);
 const baseUrl = "/api/v1";
 app.use(baseUrl, authRouter);
 app.use(baseUrl, electionRouter);
+app.use(baseUrl, userRouter)
 
-// The last router handles unknown routes
+// The last router handles unknown API routes
 app.use(baseUrl, apiRouter);
 
 // This last route handle non api requests and redirect them to the static file to handle the routing

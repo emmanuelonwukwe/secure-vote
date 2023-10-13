@@ -11,6 +11,7 @@ async function usersCreateTableQry(sql) {
         phone VARCHAR(255),
         role VARCHAR(255) NOT NULL,
         status VARCHAR(255) NOT NULL,
+        profile_image TEXT DEFAULT NULL,
         password VARCHAR(255) NOT NULL,
         date_created TIMESTAMP DEFAULT NOW(),
         time_created integer DEFAULT CAST(EXTRACT(epoch FROM NOW()) AS INT)

@@ -254,7 +254,7 @@ function Home() {
         </div>
       </section>
       {/** Know your right section */}
-      <section className="bg-aliceblue-100 relative p-5 top-[150px]">
+      <section className="bg-aliceblue-100 dark:bg-black relative p-5 top-[150px]">
         <div className="container">
           <div className="grid grid-cols-12">
             <div className="col-span-12 sm:col-span-8 text-center">
