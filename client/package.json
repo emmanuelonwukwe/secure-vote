@@ -4,11 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && npm run copy:ui:build:to:server",
+    "dev": "npm run set:dev:env && vite",
+    "build": "npm run set:prod:env && vite build && npm run copy:ui:build:to:server",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "copy:ui:build:to:server": "rm -rf ../server/dist && cp -r ./dist ../server"
+    "copy:ui:build:to:server": "rm -rf ../server/dist && cp -r ./dist ../server",
+    "set:dev:env": "echo export const REACT_APP_ENV = 'development'; > ./src/config/auto-react-env-only.js",
+    "set:prod:env": "echo export const REACT_APP_ENV = 'production'; > ./src/config/auto-react-env-only.js"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.0.3",

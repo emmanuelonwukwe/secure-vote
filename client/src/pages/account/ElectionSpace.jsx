@@ -1,6 +1,4 @@
-import { useAuth } from "../../contexts/AuthContext";
 import SortIcon from "../../components/icons/SortIcon";
-import LeftSide from "../../components/account/LeftSide";
 import axiosRequest from "../../requests/axios-request";
 import SnackBar from "../../components/alerts/SnackBar";
 import ProgressIndicator from "../../components/ProgressIndicator";
@@ -8,9 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import useMessage from "../../hooks/useMessage";
 import TrashIcon from "../../components/icons/TrashIcon";
 import EditIcon from "../../components/icons/EditIcon";
+import AccountSkeleton from "../../components/account/AccountSkeleton";
 
 export default function ElectionSpace() {
-  const { user } = useAuth();
   const [formData, setFormData] = useState({
     visibility: "public",
     voting_requirements: null,
@@ -118,7 +116,7 @@ export default function ElectionSpace() {
       await fetchElectionSpaces();
       setIsProcessing(false);
       startUpdateAction(false, electionId);
-      myFormRef.current.reset(); // Reset the form using the ref
+      myFormRef.current?.reset(); // Reset the form using the ref
 
       // Show user success message
       setMessage(response.data.message);
@@ -166,6 +164,10 @@ export default function ElectionSpace() {
 
   // This function helps to delete an election space created
   const handleDelete = async (electionId) => {
+    if (!confirm("Are you sure to delete this election")) {
+      return;
+    }
+
     setIsProcessing(true);
 
     try {
@@ -198,194 +200,171 @@ export default function ElectionSpace() {
   };
 
   return (
-    <div className="grid grid-cols-4 gap-6 mx-3">
-      <div className="col-span-4 sm:col-span-2 md:col-span-1">
-        <LeftSide />
-      </div>
-      <div className="col-span-4 sm:col-span-2 md:col-span-3">
-        <div className="flex gap-2 mb-8">
-          <input
-            className="py-4 w-full px-4 rounded-full"
-            placeholder="Search here..."
-          />
-          <span className="text-center">
-            <img
-              src="/images/user-icon.jpg"
-              className="w-10 h-10 rounded-full"
-              alt=""
-            />
-            <i>{user.role}</i>
-          </span>
-        </div>
-        <div className="flex gap-5 mb-8">
-          <img src="/images/vector9.svg" className="bg-dark-blue w-8 h-8" />
-          <span className="font-bold text-2xl">Election Space</span>
-        </div>
-        <div className="sm:max-h-[75vh] sm:overflow-y-auto">
-          <div className="flex flex-wrap gap-5 justify-around items-center">
-            {/** The form */}
-            {isProcessing && <ProgressIndicator />}
-            <SnackBar message={message} type={type} />
-            <div className="border p-3 mt-3 rounded-2xl">
-              <form ref={myFormRef} onSubmit={(e) => {actionIsUpdate ?  handleUpdate(e, formData.id) : handleCreateElectionSubmit(e)}}>
-                <div className="-mx-3 flex flex-wrap">
-                  <div className="w-full px-3 sm:w-1/2">
-                    <div className="mb-5">
-                      <label
-                        htmlFor="fName"
-                        className="mb-3 block text-base font-medium text-[#07074D]"
-                      >
-                        Election Title
-                      </label>
-                      <input
-                        autoFocus="autofocus"
-                        onChange={handleInputChange}
-                        defaultValue={formData.title}
-                        type="text"
-                        name="title"
-                        id="fName"
-                        placeholder="Election title"
-                        className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                      />
-                    </div>
-                  </div>
-                  <div className="w-full px-3 sm:w-1/2">
-                    <div className="mb-5">
-                      <label
-                        htmlFor="lName"
-                        className="mb-3 block text-base font-medium text-[#07074D]"
-                      >
-                        Who can vote?
-                      </label>
-                      <select
-                        onChange={(e) => {
-                          handleInputChange(e);
-                          toggleVisibility(e);
-                        }}
-                        defaultValue=""
-                        name="visibility"
-                        className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                      >
-                        <option value="public">Anyone</option>
-                        <option value="private">Verified voters</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div className="mb-5">
-                  <label
-                    htmlFor="guest"
-                    className="mb-3 block text-base font-medium text-[#07074D]"
-                  >
-                    Description
-                  </label>
-                  <textarea
-                    onChange={handleInputChange}
-                    defaultValue={formData.description}
-                    type="email"
-                    name="description"
-                    id="guest"
-                    placeholder="Enter the description of this election to help voters understand what it is about."
-                    className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                  ></textarea>
-                </div>
-                <div className="mb-5">
-                  <label
-                    htmlFor="guest"
-                    className="mb-3 block text-base font-medium text-[#07074D]"
-                  >
-                    Candidates
-                  </label>
-                  <textarea
-                    onChange={handleInputChange}
-                    defaultValue={formData.candidates}
-                    type="email"
-                    name="candidates"
-                    id="guest"
-                    placeholder="Enter candidates account emails seperated by commas e.g peterobi@email.com, atiku@gmail.com"
-                    className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                  ></textarea>
-                </div>
-                {!isPublic && (
+    <AccountSkeleton pageName="Manage Election">
+      <div className="sm:max-h-[75vh] sm:overflow-y-auto">
+        <div className="flex flex-wrap gap-5 justify-around items-center">
+          {/** The form */}
+          {isProcessing && <ProgressIndicator />}
+          <SnackBar message={message} type={type} />
+          <div className="border p-3 mt-3 rounded-2xl">
+            <form ref={myFormRef} onSubmit={(e) => { actionIsUpdate ? handleUpdate(e, formData.id) : handleCreateElectionSubmit(e) }}>
+              <div className="-mx-3 flex flex-wrap">
+                <div className="w-full px-3 sm:w-1/2">
                   <div className="mb-5">
                     <label
-                      htmlFor="guest"
+                      htmlFor="fName"
                       className="mb-3 block text-base font-medium text-[#07074D]"
                     >
-                      Requirements
+                      Election Title
                     </label>
-                    <textarea
+                    <input
+                      autoFocus="autofocus"
                       onChange={handleInputChange}
-                      defaultValue={formData.voting_requirements}
-                      type="email"
-                      name="voting_requirements"
-                      id="guest"
-                      placeholder="Enter the requirements to vote separated with commas e.g I.D card required, birth certificate"
-                      className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                    ></textarea>
+                      defaultValue={formData.title}
+                      type="text"
+                      name="title"
+                      id="fName"
+                      placeholder="Election title"
+                      className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    />
                   </div>
-                )}
-
-                <div>
-                  <button className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
-                    {actionIsUpdate ? "Update" : "Create"} Election
-                  </button>
                 </div>
-              </form>
-            </div>
-          </div>
-          <div className="flex gap-5 mt-12">
-            <SortIcon />
-            <span className="font-bold text-2xl">Election Spaces</span>
-          </div>
-          <div className="overflow-auto mt-4 mb-8">
-            <table className="transactions-table w-full text-center">
-              <thead className="bg-black text-white">
-                <tr>
-                  <th>Reference</th>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Status</th>
-                  <th>Date&nbsp;Created</th>
-                  <th>Delete</th>
-                  <th>Edit</th>
-                </tr>
-              </thead>
-              <tbody>
-                {myElections.map((election, i) => (
-                  <tr key={i} className="border-b">
-                    <td className="text-green-500 font-bold">
-                      SECUREID-{election.id}
-                    </td>
-                    <td>{election.title}</td>
-                    <td>{election.description}</td>
-                    <td>{election.status}</td>
-                    <td>{election.date_created}</td>
-                    <td>
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => handleDelete(election.id)}
-                      >
-                        <TrashIcon />
-                        Delete
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        className="btn btn-primary"
-                        onClick={() => startUpdateAction(true, election.id)}
-                      >
-                        <EditIcon />
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                <div className="w-full px-3 sm:w-1/2">
+                  <div className="mb-5">
+                    <label
+                      htmlFor="lName"
+                      className="mb-3 block text-base font-medium text-[#07074D]"
+                    >
+                      Who can vote?
+                    </label>
+                    <select
+                      onChange={(e) => {
+                        handleInputChange(e);
+                        toggleVisibility(e);
+                      }}
+                      defaultValue=""
+                      name="visibility"
+                      className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    >
+                      <option value="public">Anyone</option>
+                      <option value="private">Verified voters</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="mb-5">
+                <label
+                  htmlFor="guest"
+                  className="mb-3 block text-base font-medium text-[#07074D]"
+                >
+                  Description
+                </label>
+                <textarea
+                  onChange={handleInputChange}
+                  defaultValue={formData.description}
+                  type="email"
+                  name="description"
+                  id="guest"
+                  placeholder="Enter the description of this election to help voters understand what it is about."
+                  className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                ></textarea>
+              </div>
+              <div className="mb-5">
+                <label
+                  htmlFor="guest"
+                  className="mb-3 block text-base font-medium text-[#07074D]"
+                >
+                  Candidates
+                </label>
+                <textarea
+                  onChange={handleInputChange}
+                  defaultValue={formData.candidates}
+                  type="email"
+                  name="candidates"
+                  id="guest"
+                  placeholder="Enter candidates account emails seperated by commas e.g peterobi@email.com, atiku@gmail.com"
+                  className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                ></textarea>
+              </div>
+              {!isPublic && (
+                <div className="mb-5">
+                  <label
+                    htmlFor="guest"
+                    className="mb-3 block text-base font-medium text-[#07074D]"
+                  >
+                    Requirements
+                  </label>
+                  <textarea
+                    onChange={handleInputChange}
+                    defaultValue={formData.voting_requirements}
+                    type="email"
+                    name="voting_requirements"
+                    id="guest"
+                    placeholder="Enter the requirements to vote separated with commas e.g I.D card required, birth certificate"
+                    className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                  ></textarea>
+                </div>
+              )}
+
+              <div>
+                <button className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                  {actionIsUpdate ? "Update" : "Create"} Election
+                </button>
+              </div>
+            </form>
           </div>
         </div>
+        <div className="flex gap-5 mt-12">
+          <SortIcon />
+          <span className="font-bold text-2xl">Election Spaces</span>
+        </div>
+        <div className="overflow-auto mt-4 mb-8">
+          <table className="transactions-table w-full text-center">
+            <thead className="bg-black text-white">
+              <tr>
+                <th>Reference</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Date&nbsp;Created</th>
+                <th>Delete</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              {myElections.map((election, i) => (
+                <tr key={i} className="border-b">
+                  <td className="text-green-500 font-bold">
+                    SECUREID-{election.id}
+                  </td>
+                  <td>{election.title}</td>
+                  <td>{election.description}</td>
+                  <td>{election.status}</td>
+                  <td>{election.date_created}</td>
+                  <td>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handleDelete(election.id)}
+                    >
+                      <TrashIcon />
+                      Delete
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => startUpdateAction(true, election.id)}
+                    >
+                      <EditIcon />
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </AccountSkeleton>
   );
 }
