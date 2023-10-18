@@ -4,6 +4,7 @@ import Controller from "./Controller.js";
 import jwt from "jsonwebtoken";
 import sql from "../../../config/db.js";
 import bcrypt from "bcryptjs";
+import app from "../../../app.js";
 
 class LoginController extends Controller {
   /**
@@ -49,6 +50,10 @@ class LoginController extends Controller {
     if (!userExists || !passwordMatched) {
       throw new ApiException("Invalid email or password", 409);
     }
+
+    // Emit the logged in event
+    // app.on("registered", () => { console.log("Logged in success")});
+    // app.emit("registered");
 
     // Authenticated the user to db
     const authUser = userRow[0];
