@@ -7,13 +7,14 @@ import InboxIcon from "../../components/icons/InboxIcon";
 import InboxStackIcon from "../../components/icons/InboxStackIcon";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import TrophyIcon from "../../components/icons/TrophyIcon";
 
 export default function Dashboard() {
   const { user } = useAuth();
 
   return (<AccountSkeleton pageName="Dashboard">
-    <div className="sm:max-h-[75vh] sm:overflow-y-auto">
-      <div className="flex flex-wrap gap-5 justify-center items-center">
+    <div className="sm:max-h-[75vh] sm:overflow-y-auto p-1">
+      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 gap-y-6 justify-items-center">
         {user.role == "manager" && (
           <div className="account-card">
             <InboxStackIcon />
@@ -30,6 +31,17 @@ export default function Dashboard() {
         <div className="account-card">
           <ThumbUpIcon />
           <a href="#">
+            <h5 className="account-card-title">Cast Vote</h5>
+          </a>
+          <p className="account-card-sub-title">public/private</p>
+          <Link to="/account/elections" className="account-card-link">
+            Choose election
+            <ExportIcon />
+          </Link>
+        </div>
+        <div className="account-card">
+          <TrophyIcon />
+          <a href="#">
             <h5 className="account-card-title">Total Votes</h5>
           </a>
           <p className="account-card-sub-title">5,600</p>
@@ -38,7 +50,6 @@ export default function Dashboard() {
             <ExportIcon />
           </a>
         </div>
-
         <div className="account-card">
           <ChatBubbleLeft />
           <a href="#">

@@ -1,11 +1,10 @@
 import ApiException from "../../Exceptions/ApiException.js";
 import Election from "../../Models/Election.js";
 import Controller from "./Controller.js";
-import jwt from "jsonwebtoken";
 import sql from "../../../config/db.js";
-import bcrypt from "bcryptjs";
 import AuthController from "./AuthController.js";
 import User from "../../Models/User.js";
+import VoteController from "./VoteController.js";
 
 class ElectionController extends Controller {
   /**
@@ -174,6 +173,53 @@ class ElectionController extends Controller {
 
     return true;
   }
+
+  /**
+   * This function gets all elections from the database
+   */
+  static async all(){
+    const election = new Election();
+    const elections = await election.all();
+
+    return elections;
+  }
+
+  /**
+   * This function returns the candidates information of the given election id
+   */
+  static async candidatesInfo(electionId){
+    const election = new Election();
+    const user = new User();
+
+    // Check if the election with this id does not exist to return empty array
+    if (!await election.modelExists(sql`id = ${electionId}`)) {
+      return [];
+    }
+
+    let electionData = await election.where(sql`id = ${electionId}`);
+    electionData = electionData[0];
+    const candidates = electionData.candidates;
+    const candidatesData = [];
+    
+    // Access the vote controller instance
+    const voteController = new VoteController();
+
+    // Loop the candidates to prepare his account information
+    for (const candidateEmail of candidates) {
+      let candidate = await user.where(sql`email = ${candidateEmail}`);
+      candidate = candidate[0];
+      delete candidate.password;
+      delete candidate.date_created;
+      delete candidate.time_created;
+
+      // Add the vote counts to the data
+      candidate.vote_count = await  voteController.countVotes(candidate.id, electionId);
+      candidatesData.push(candidate);
+    }
+
+    return candidatesData;
+  }
+
 }
 
 export default ElectionController;

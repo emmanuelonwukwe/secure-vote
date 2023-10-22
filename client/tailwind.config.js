@@ -8,6 +8,10 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
+      screens: {
+        "xxs": "362px",
+        "xs": "542px"
+      },
       colors: {
         "aliceblue": {
           100: "#ecf9ff",

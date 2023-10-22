@@ -29,7 +29,7 @@ export default function DrawerUl() {
         </Link>
       </li>
       <li>
-        <Link to="/services" className="drawer-link">
+        <Link to="/account/elections" className="drawer-link">
           <InboxIcon />
           <span className="flex-1 ml-3 whitespace-nowrap text-gray-400">
             Elections

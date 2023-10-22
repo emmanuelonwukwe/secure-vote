@@ -50,8 +50,8 @@ export default function AccountSkeleton({ pageName, children }) {
             <div className="col-span-4 sm:col-span-2 md:col-span-3">
                 <div className="flex gap-2 mb-8">
                     <div className="py-1 w-full px-4 rounded-lg bg-white">
-                        <p className="italic">Fullname: <span className="text-blue-400">{user.first_name}</span></p>
-                        <p className="italic text-sm sm:text-md mt-2">Email: {user.email}</p>
+                        <p className="italic dark:text-black">Fullname: <span className="text-blue-400">{user.first_name}</span></p>
+                        <p className="italic dark:text-black text-sm sm:text-md mt-2">Email: {user.email}</p>
                     </div>
                     <label htmlFor="user-photo" className={`text-center hover:cursor-pointer" ${isUploading && 'animate-spin'}`}>
                         <img

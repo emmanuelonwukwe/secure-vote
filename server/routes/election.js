@@ -56,7 +56,7 @@ router.put(
   async (req, res) => {
     try {
       const electionData = req.body;
-      
+
       const { id } = req.params;
       const token = req.headers.token;
 
@@ -89,6 +89,33 @@ router.delete(
     } catch (error) {
       handleCaughtErrorRes(error, res);
     }
+  }
+);
+
+// This route gets the whole election for the users to view on the system
+router.get(
+  "/elections/all",
+  MustVerifyTokenMiddleware.handle,
+  async (req, res) => {
+    const elections = await ElectionController.all();
+
+    res.status(200).json({
+      elections,
+    });
+  }
+);
+
+// This route gets the details of the election candidates 
+router.get(
+  "/elections/:electionId/candidates",
+  MustVerifyTokenMiddleware.handle,
+  async (req, res) => {
+    const { electionId } = req.params;
+    const candidates = await ElectionController.candidatesInfo(electionId);
+
+    res.status(200).json({
+      candidates,
+    });
   }
 );
 

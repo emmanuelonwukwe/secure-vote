@@ -1,3 +1,4 @@
+/** Google fonts here */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -78,9 +79,17 @@
     }
 }
 
-::-webkit-scrollbar{
-    background-color: skyblue;
-    width: 10px;
+@layer components {
+    .btn-success {
+        background-color: theme("colors.softgreen");
+    }
+}
+
+@layer utilities {
+    ::-webkit-scrollbar{
+        background-color: skyblue;
+        width: 10px;
+    }    
 }
 
 ::-webkit-scrollbar-button{

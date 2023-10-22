@@ -17,6 +17,8 @@ import { ThemeContextProvider  } from "./contexts/ThemeContext";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import ElectionSpace from "./pages/account/ElectionSpace";
 import Practice from "./pages/Practice";
+import Elections from "./pages/account/Elections";
+import CastVote from "./pages/account/CastVote";
 
 // Create the router for the pages
 const router = createBrowserRouter([
@@ -75,6 +77,14 @@ const router = createBrowserRouter([
         path: "/account/election-space",
         element: <ElectionSpace />,
       },
+      {
+        path: "/account/elections",
+        element: <Elections />,
+      },
+      {
+        path: "/account/cast-vote/:electionId",
+        element: <CastVote />
+      }
     ],
   },
 ]);
