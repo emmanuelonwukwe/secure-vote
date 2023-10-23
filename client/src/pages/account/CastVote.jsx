@@ -59,7 +59,7 @@ export default function CastVote() {
       (manifesto) => manifesto.user == userEmail
     );
 
-    return manifest.manifesto;
+    return manifest?.manifesto;
   }, []);
 
   // This function handles the
