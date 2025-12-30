@@ -40,6 +40,12 @@ class SetAppGlobalMiddlewares extends BaseMiddleware{
         app.use(cors({ origin: [...allowedOrigins] }));
         //app.use(AdminOnlyMiddleware.handle)
 
+        // Set Content Security Policy header to mitigate XSS attacks
+        app.use((req, res, next) => {
+            res.setHeader('Content-Security-Policy', "default-src 'self'");
+            next();
+        });
+
         // Add static file
         app.use(this.express.static("dist"));
         app.use("/uploads", this.express.static("uploads"));
